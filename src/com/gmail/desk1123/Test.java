@@ -1,5 +1,6 @@
 package com.gmail.desk1123;
 
+import com.gmail.desk1123.objets.Cage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.bukkit.Bukkit;
@@ -28,7 +29,6 @@ public class Test implements CommandExecutor {
         t = Bukkit.getScheduler().scheduleAsyncDelayedTask(PvPCage.getInstance(), new Runnable() {
             public void run() {
                 try {
-
                     Utils.createParticleText("3", p.getLocation());
                     Thread.sleep(1000L);
                     Utils.createParticleText("2", p.getLocation());
@@ -42,9 +42,8 @@ public class Test implements CommandExecutor {
             }
 
         }, 10L);
-
         Cage c = new Cage();
-        c.build((Player) cs, Integer.valueOf(args[0]),Integer.valueOf(args[1]));
+        c.build((Player) cs, Integer.valueOf(args[0]), Integer.valueOf(args[1]));
         return true;
     }
 

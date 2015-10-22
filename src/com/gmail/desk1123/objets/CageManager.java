@@ -1,4 +1,4 @@
-package com.gmail.desk1123;
+package com.gmail.desk1123.objets;
 
 /**
  *
