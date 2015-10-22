@@ -18,7 +18,7 @@ public class Utils {
         text.visibleRange = 50F;
         text.autoOrient = true;
         text.particle = de.slikey.effectlib.util.ParticleEffect.FLAME;
-//        text.setLocation(loc.add(5, 2, 0));
+        text.setLocation(loc.add(5, 2, 0));
         text.start();
         //dupa dupa dupa
         
