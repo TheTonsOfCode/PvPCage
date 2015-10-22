@@ -1,0 +1,9 @@
+name: PvpCage
+main: com.gmail.desk1123.PvPCage
+version: 1.1 FULL
+description: Drop!
+author: dekros987
+depend: [ProtocolLib]
+commands:
+    test:
+        description: glowna komenda z dropem
