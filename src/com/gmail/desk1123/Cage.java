@@ -53,11 +53,11 @@ public class Cage {
 
         int ly = this.center.getBlockY();
 
-        for (int x = px; x < lx; x++) {
-            for (int z = pz; z < lz; z++) {
+        for (int x = px; x <= lx; x++) {
+            for (int z = pz; z <= lz; z++) {
                 for (int y = 0; y <= 3; y++) {
-                    if ((x == 0 || z == 0) || (x == lx - 1 || z == lz - 1)
-                            || (x == lx - 1 || z == 0) || (x == 0 || z == lz - 1)) {
+                    if ((x == px || z == pz) || (x == lx || z == lz)
+                            || (x == lx || z == pz) || (x == px || z == lz)) {
                         Location loc = new Location(world, x, ly + y, z);
                         loc.getBlock().setType(build);
                         blocks.add(loc);

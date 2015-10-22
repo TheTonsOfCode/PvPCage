@@ -19,7 +19,7 @@ public class PvPCage extends JavaPlugin {
         instance = this;
         effectManager = new EffectManager(instance);
 
-        getCommand("test").setExecutor(new Test());
+        getCommand("cage").setExecutor(new Test());
     }
 
     public void onDisable() {
