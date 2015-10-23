@@ -1,5 +1,6 @@
 package com.gmail.desk1123;
 
+import com.gmail.desk1123.builder.CageBuilder;
 import com.gmail.desk1123.objets.Cage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,25 +26,27 @@ public class Test implements CommandExecutor {
         }
         final Player p = (Player) cs;
 
-        Utils.createParticleText("", p.getLocation());
-        t = Bukkit.getScheduler().scheduleAsyncDelayedTask(PvPCage.getInstance(), new Runnable() {
-            public void run() {
-                try {
-                    Utils.createParticleText("3", p.getLocation());
-                    Thread.sleep(1000L);
-                    Utils.createParticleText("2", p.getLocation());
-                    Thread.sleep(1000L);
-                    Utils.createParticleText("1", p.getLocation());
-                    Thread.sleep(1000L);
-                    Utils.createParticleText("START", p.getLocation());
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-
-        }, 10L);
-        Cage c = new Cage();
-        c.build((Player) cs, Integer.valueOf(args[0]), Integer.valueOf(args[1]));
+        CageBuilder cb = new CageBuilder();
+        p.teleport(cb.createCageWorld().getSpawnLocation());
+//        Utils.createParticleText("", p.getLocation());
+//        t = Bukkit.getScheduler().scheduleAsyncDelayedTask(PvPCage.getInstance(), new Runnable() {
+//            public void run() {
+//                try {
+//                    Utils.createParticleText("3", p.getLocation());
+//                    Thread.sleep(1000L);
+//                    Utils.createParticleText("2", p.getLocation());
+//                    Thread.sleep(1000L);
+//                    Utils.createParticleText("1", p.getLocation());
+//                    Thread.sleep(1000L);
+//                    Utils.createParticleText("START", p.getLocation());
+//                } catch (InterruptedException ex) {
+//                    Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//
+//        }, 10L);
+//        Cage c = new Cage();
+//        c.build((Player) cs, Integer.valueOf(args[0]), Integer.valueOf(args[1]));
         return true;
     }
 
