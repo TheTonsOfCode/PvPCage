@@ -37,7 +37,7 @@ public class MessageManager {
             e.printStackTrace();
         }
 
-        prefix = ChatUtils.fixColor(messages.getString("Message.prefix"));
+        prefix = Utils.fixColor(messages.getString("Message.prefix"));
     }
 
     //set string from file
@@ -56,15 +56,15 @@ public class MessageManager {
 
     //send string with prefix to a player
     public static void sendPrefixMessage(Player p, String msg) {
-        p.sendMessage(ChatUtils.fixColor(prefix + msg));
+        p.sendMessage(Utils.fixColor(prefix + msg));
     }
 
     public static void sendPrefixMessage(CommandSender sender, String msg) {
-        sender.sendMessage(ChatUtils.fixColor(prefix + msg));
+        sender.sendMessage(Utils.fixColor(prefix + msg));
     }
 
     public static void sendMessage(CommandSender sender, String msg) {
-        sender.sendMessage(ChatUtils.fixColor(msg));
+        sender.sendMessage(Utils.fixColor(msg));
     }
 
     public static void sendMessagesList(CommandSender sender, String path, HashMap<String, String> vars, boolean prefix) {
@@ -160,7 +160,7 @@ public class MessageManager {
     }
 
     public static void sendUsageMessage(CommandSender sender, String path) {
-        sender.sendMessage(ChatUtils.fixColor(getMessagesString("chat.usage." + path)));
+        sender.sendMessage(Utils.fixColor(getMessagesString("chat.usage." + path)));
     }
 
     public static String replaceMap(String msg, HashMap<String, String> vars) {
