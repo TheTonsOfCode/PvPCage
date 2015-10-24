@@ -1,7 +1,7 @@
 package com.noname.pvpcage.managers;
 
-import com.noname.pvpcage.objets.Team;
-import com.noname.pvpcage.objets.User;
+import com.noname.pvpcage.objects.Team;
+import com.noname.pvpcage.objects.User;
 import java.util.ArrayList;
 import java.util.List;
 

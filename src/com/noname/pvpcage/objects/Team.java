@@ -1,4 +1,4 @@
-package com.noname.pvpcage.objets;
+package com.noname.pvpcage.objects;
 
 import java.util.List;
 

@@ -101,7 +101,7 @@ public class CageBuilder {
         while (spawn.add(0, posY, 0).getBlock().getType() == Material.AIR) {
             posY++;//getting upper location
         }
-        player.teleport(getCageWorld().getSpawnLocation().add(0, posY, 0));
+        player.teleport(getCageWorld().getSpawnLocation().add(0.5, posY, 0.5));
     }
     
     private static ArrayList<Cage> onlineCages = new ArrayList<>();

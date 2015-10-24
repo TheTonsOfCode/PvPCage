@@ -1,20 +1,15 @@
 package com.noname.pvpcage;
 
 import com.noname.pvpcage.utilities.MessageManager;
+import com.noname.pvpcage.utilities.Utils;
 import de.slikey.effectlib.EffectManager;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import org.bukkit.event.HandlerList;
-import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-/**
- *
- * @author dekros987
- */
 public class PvPCage extends JavaPlugin {
 
     private static PvPCage instance;
@@ -26,7 +21,7 @@ public class PvPCage extends JavaPlugin {
         msgManager = new MessageManager();
         effectManager = new EffectManager(instance);
 
-        getCommand("cage").setExecutor(new Test());
+        Utils.registerCommands(this, "com.noname.pvpcage.commands");
     }
 
     public void onDisable() {
@@ -34,10 +29,6 @@ public class PvPCage extends JavaPlugin {
 //        HandlerList.unregisterAll((Listener) this);
     }
 
-    /*
-    jest sprawa
-    jakbys mogl napisac co ma byc w danych klasach bo nie wiem co ma np byc w JustDuelAnywhereCage xD
-    */
     public static EffectManager getEffectManager() {
         return effectManager;
     }

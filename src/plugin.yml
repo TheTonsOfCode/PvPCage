@@ -1,9 +1,6 @@
-name: PvpCage
+name: PVPCage
 main: com.noname.pvpcage.PvPCage
-version: 1.1 FULL
-description: Drop!
+version: 0.0.0.1
+description: PVPArena
 authors: [dekros987, TheTonsOfCode]
 #depend: [ProtocolLib]
-commands:
-    cage:
-        description: glowna komenda z dropem

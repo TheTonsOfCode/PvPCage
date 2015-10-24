@@ -1,6 +1,6 @@
 package com.noname.pvpcage.managers;
 
-import com.noname.pvpcage.objets.User;
+import com.noname.pvpcage.objects.User;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
