@@ -1,6 +1,6 @@
-package com.gmail.desk1123;
+package com.noname.pvpcage;
 
-import com.gmail.desk1123.utilities.MessageManager;
+import com.noname.pvpcage.utilities.MessageManager;
 import de.slikey.effectlib.EffectManager;
 import java.io.File;
 import java.io.FileOutputStream;

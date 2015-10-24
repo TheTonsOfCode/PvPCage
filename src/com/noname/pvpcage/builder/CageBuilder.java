@@ -1,7 +1,7 @@
-package com.gmail.desk1123.builder;
+package com.noname.pvpcage.builder;
 
-import com.gmail.desk1123.utilities.generators.SchemeRecipment;
-import com.gmail.desk1123.utilities.generators.SchemeStruct;
+import com.noname.pvpcage.utilities.generators.SchemeRecipment;
+import com.noname.pvpcage.utilities.generators.SchemeStruct;
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
 import org.bukkit.Location;

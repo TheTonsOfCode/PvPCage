@@ -1,6 +1,6 @@
-package com.gmail.desk1123.managers;
+package com.noname.pvpcage.managers;
 
-import com.gmail.desk1123.objets.User;
+import com.noname.pvpcage.objets.User;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;

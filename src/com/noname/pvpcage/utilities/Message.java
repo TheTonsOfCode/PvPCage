@@ -1,7 +1,7 @@
-package com.gmail.desk1123.utilities;
+package com.noname.pvpcage.utilities;
 
 
-import com.gmail.desk1123.PvPCage;
+import com.noname.pvpcage.PvPCage;
 import java.util.HashMap;
 import java.util.List;
 import org.bukkit.command.CommandSender;

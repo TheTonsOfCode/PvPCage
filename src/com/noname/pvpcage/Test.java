@@ -1,10 +1,7 @@
-package com.gmail.desk1123;
+package com.noname.pvpcage;
 
-import com.gmail.desk1123.builder.CageBuilder;
-import com.gmail.desk1123.builder.Cage;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.bukkit.Bukkit;
+import com.noname.pvpcage.builder.CageBuilder;
+import com.noname.pvpcage.builder.cage.WalledCage;
 import org.bukkit.command.Command;
 
 import org.bukkit.command.CommandExecutor;
@@ -25,10 +22,12 @@ public class Test implements CommandExecutor {
             return true;
         }
         final Player p = (Player) cs;
+        
+        new WalledCage().onCreateBattle(p.getLocation());
        
-        CageBuilder.createCageWorld();
-        CageBuilder.teleportToCageWorld(p);
-        //p.teleport(CageBuilder.createCageWorld().getSpawnLocation());
+//        CageBuilder.createCageWorld();
+//        CageBuilder.teleportToCageWorld(p);
+
 //        Utils.createParticleText("", p.getLocation());
 //        t = Bukkit.getScheduler().scheduleAsyncDelayedTask(PvPCage.getInstance(), new Runnable() {
 //            public void run() {

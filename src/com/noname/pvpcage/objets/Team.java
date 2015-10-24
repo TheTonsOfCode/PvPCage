@@ -1,4 +1,4 @@
-package com.gmail.desk1123.objets;
+package com.noname.pvpcage.objets;
 
 import java.util.List;
 
