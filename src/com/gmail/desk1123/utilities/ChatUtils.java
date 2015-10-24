@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.bukkit.ChatColor;
 
-/**
- *
- * @author dekros987
- */
 public class ChatUtils {
 
     public static String fixColor(String string) {

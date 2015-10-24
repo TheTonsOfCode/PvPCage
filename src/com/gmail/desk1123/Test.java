@@ -1,7 +1,7 @@
 package com.gmail.desk1123;
 
 import com.gmail.desk1123.builder.CageBuilder;
-import com.gmail.desk1123.objets.Cage;
+import com.gmail.desk1123.builder.Cage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.bukkit.Bukkit;
@@ -25,9 +25,10 @@ public class Test implements CommandExecutor {
             return true;
         }
         final Player p = (Player) cs;
-
-        CageBuilder cb = new CageBuilder();
-        p.teleport(cb.createCageWorld().getSpawnLocation());
+       
+        CageBuilder.createCageWorld();
+        CageBuilder.teleportToCageWorld(p);
+        //p.teleport(CageBuilder.createCageWorld().getSpawnLocation());
 //        Utils.createParticleText("", p.getLocation());
 //        t = Bukkit.getScheduler().scheduleAsyncDelayedTask(PvPCage.getInstance(), new Runnable() {
 //            public void run() {

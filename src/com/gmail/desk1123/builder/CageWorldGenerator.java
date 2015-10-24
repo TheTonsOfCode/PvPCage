@@ -19,7 +19,9 @@ public class CageWorldGenerator extends ChunkGenerator
                 setBlock(result, x, y, z, (byte)7);
                 } else {
                   if(x == 0 || z == 0)
-                    setBlock(result, x, y, z, (byte)80);
+                    setBlock(result, x, y, z, (byte)42);
+                  else if(x == z || (z == 16 - x && x == 16 - z))
+                    setBlock(result, x, y, z, (byte)172);
                   else
                     setBlock(result, x, y, z, (byte)7);
                 }
@@ -27,30 +29,12 @@ public class CageWorldGenerator extends ChunkGenerator
         }
     }
     
-//    Iterator<BedrockCoords> it = this.plugin.blocks.iterator();
-//    while (it.hasNext())
-//    {
-//      BedrockCoords block = (BedrockCoords)it.next();
-//      if ((block.x >= chunkX * 16) && (block.x < (chunkX + 1) * 16) && (block.z >= chunkZ * 16) && (block.z < (chunkZ + 1) * 16))
-//      {
-//        int x = block.x % 16;
-//        if (x < 0) {
-//          x += 16;
-//        }
-//        int z = block.z % 16;
-//        if (z < 0) {
-//          z += 16;
-//        }
-//        setBlock(result, x, block.y, z, (byte)7);
-//        it.remove();
-//      }
-//    }
     return result;
   }
   
   public Location getFixedSpawnLocation(World world, Random random)
   {
-    return new Location(world, 0, 11, 0);
+    return world.getHighestBlockAt(0, 0).getLocation().add(0, 1, 0);
   }
   
   private void setBlock(short[][] result, int x, int y, int z, short blkid) 

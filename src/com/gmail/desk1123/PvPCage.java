@@ -31,7 +31,7 @@ public class PvPCage extends JavaPlugin {
 
     public void onDisable() {
         effectManager.dispose();
-        HandlerList.unregisterAll((Listener) this);
+//        HandlerList.unregisterAll((Listener) this);
     }
 
     public static EffectManager getEffectManager() {
