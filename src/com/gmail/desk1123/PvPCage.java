@@ -34,6 +34,10 @@ public class PvPCage extends JavaPlugin {
 //        HandlerList.unregisterAll((Listener) this);
     }
 
+    /*
+    jest sprawa
+    jakbys mogl napisac co ma byc w danych klasach bo nie wiem co ma np byc w JustDuelAnywhereCage xD
+    */
     public static EffectManager getEffectManager() {
         return effectManager;
     }
