@@ -11,17 +11,17 @@ import org.bukkit.WorldCreator;
 import org.bukkit.entity.Player;
 
 public class CageBuilder {
-    
+
     //Default Cage World Name
     private static final String CAGE_WORLD = "PVPCageArenas";
-    
+
     public static World createCageWorld() {
-        World newWorld = null;   
-        
+        World newWorld = null;
+
         WorldCreator wc = new WorldCreator(CAGE_WORLD);
         wc.environment(World.Environment.NORMAL);
         wc.generator(new CageWorldGenerator());
-        
+
         newWorld = wc.createWorld();
         newWorld.setAnimalSpawnLimit(0);
         newWorld.setPVP(true);
@@ -31,46 +31,46 @@ public class CageBuilder {
         newWorld.setWaterAnimalSpawnLimit(0);
         newWorld.setTicksPerAnimalSpawns(0);
         newWorld.setTime(0);
-        
+
         createSpawnPlatform();
-        
+
         return newWorld;
     }
-    
+
     private static void createSpawnPlatform() {
         World w = getCageWorld();
-        SchemeStruct ss = new SchemeStruct("A", new String[][] {
-            new String[] {
+        SchemeStruct ss = new SchemeStruct("A", new String[][]{
+            new String[]{
                 "AAA",
                 "A~A",
                 "AAA"
             },
-            new String[] {
+            new String[]{
                 "AAA",
                 "AWA",
                 "AAA"
             },
-            new String[] {
+            new String[]{
                 "AWA",
                 "WWW",
                 "AWA"
             },
-            new String[] {
+            new String[]{
                 "WWW",
                 "WWW",
                 "WWW"
             },
-            new String[] {
+            new String[]{
                 "WAW",
                 "AAA",
                 "WAW"
             },
-            new String[] {
+            new String[]{
                 "WAW",
                 "AAA",
                 "WAW"
             },
-            new String[] {
+            new String[]{
                 "BAB",
                 "AEA",
                 "BAB"
@@ -80,21 +80,26 @@ public class CageBuilder {
             new SchemeRecipment("B", Material.BOOKSHELF),
             new SchemeRecipment("E", Material.ENCHANTMENT_TABLE)
         });
-        
-        ss.build(new Location(w, 0, 12, 0));        
+
+        ss.build(new Location(w, 0, 12, 0));
+
     }
-    
+
     public static World getCageWorld() {
         World w = Bukkit.getWorld(CAGE_WORLD);
-        
         if (w == null) {
             w = createCageWorld();
         }
 
         return w;
     }
-    
+
     public static void teleportToCageWorld(Player player) {
-        player.teleport(getCageWorld().getSpawnLocation().add(0, 5, 0));
+        Location spawn = getCageWorld().getSpawnLocation();
+        int posY = 0;
+        while (spawn.add(0, posY, 0).getBlock().getType() == Material.AIR) {
+            posY++;//getting upper location
+        }
+        player.teleport(getCageWorld().getSpawnLocation().add(0, posY, 0));
     }
 }
