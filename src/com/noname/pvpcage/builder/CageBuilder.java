@@ -32,7 +32,7 @@ public class CageBuilder {
         newWorld.setWaterAnimalSpawnLimit(0);
         newWorld.setTicksPerAnimalSpawns(0);
         newWorld.setTime(0);
-
+        
         createSpawnPlatform();
 
         return newWorld;

@@ -1,5 +1,6 @@
 package com.noname.pvpcage;
 
+import com.noname.pvpcage.utilities.Configuration;
 import com.noname.pvpcage.utilities.MessageManager;
 import com.noname.pvpcage.utilities.Utils;
 import de.slikey.effectlib.EffectManager;
@@ -20,6 +21,8 @@ public class PvPCage extends JavaPlugin {
         instance = this;
         msgManager = new MessageManager();
         effectManager = new EffectManager(instance);
+        saveDefaultConfig();
+        Configuration.loadConfiguration();
 
         Utils.registerCommands(this, "com.noname.pvpcage.commands");
     }

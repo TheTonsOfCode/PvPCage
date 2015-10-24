@@ -3,6 +3,7 @@ package com.noname.pvpcage.builder.cage;
 import com.noname.pvpcage.builder.Cage;
 import com.noname.pvpcage.builder.CageCuboid;
 import com.noname.pvpcage.builder.CageType;
+import com.noname.pvpcage.utilities.Configuration;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -11,8 +12,8 @@ public class WalledCage extends Cage {
     
     private static final int SIZE = 10;
     private static final Material 
-            WALL_MATERIAL = Material.EMERALD_BLOCK,
-            FLOOR_MATERIAL = Material.SPONGE;
+            WALL_MATERIAL = Configuration.CAGE_WALL_MATERIAL,
+            FLOOR_MATERIAL = Configuration.CAGE_FLOOR_MATERIAL;
     
     public WalledCage() {
         super(CageType.WALLS);

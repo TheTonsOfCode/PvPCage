@@ -1,0 +1,9 @@
+MySQL:
+    Host: localhost
+    Password: haslo123
+    Database: minecraft
+    User: root
+    Port: 3306
+Cage:
+    Wall_Material: STAINED_GLASS
+    Floor_Material: NETHER_BRICK

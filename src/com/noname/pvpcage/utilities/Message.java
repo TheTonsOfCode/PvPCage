@@ -15,7 +15,7 @@ public enum Message {
 
     
     Message_prefix;
-
+    
     private static final MessageManager msgManager = PvPCage.getMessageManager();
     private String path = null;
     private HashMap<String, String> vars = new HashMap<>();
