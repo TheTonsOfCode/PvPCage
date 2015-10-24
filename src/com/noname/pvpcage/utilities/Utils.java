@@ -8,10 +8,6 @@ import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 
-/**
- *
- * @author dekros987
- */
 public class Utils {
 
     public static void createParticleText(String chars, Location loc) {
@@ -23,9 +19,7 @@ public class Utils {
         text.autoOrient = true;
         text.particle = de.slikey.effectlib.util.ParticleEffect.FLAME;
         text.setLocation(loc.add(5, 2, 0));
-        text.start();
-        //dupa dupa dupa
-        
+        text.start();       
     }
     
     public static String fixColor(String string) {

@@ -1,8 +1,8 @@
 package com.noname.pvpcage.builder.cage;
 
 import com.noname.pvpcage.builder.Cage;
+import com.noname.pvpcage.builder.CageCuboid;
 import com.noname.pvpcage.builder.CageType;
-import com.noname.pvpcage.objets.User;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -16,6 +16,11 @@ public class WalledCage extends Cage {
     
     public WalledCage() {
         super(CageType.WALLS);
+    }
+    
+    @Override
+    public CageCuboid calculateCuboid() {
+        return new CageCuboid(SIZE);
     }
 
     @Override
@@ -51,7 +56,7 @@ public class WalledCage extends Cage {
     }
 
     @Override
-    public void onEndBattle(User winner) {
+    public void onRemoveBattle() {
     
     }
 }

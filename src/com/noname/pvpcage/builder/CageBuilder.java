@@ -2,6 +2,7 @@ package com.noname.pvpcage.builder;
 
 import com.noname.pvpcage.utilities.generators.SchemeRecipment;
 import com.noname.pvpcage.utilities.generators.SchemeStruct;
+import java.util.ArrayList;
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
 import org.bukkit.Location;
@@ -101,5 +102,11 @@ public class CageBuilder {
             posY++;//getting upper location
         }
         player.teleport(getCageWorld().getSpawnLocation().add(0, posY, 0));
+    }
+    
+    private static ArrayList<Cage> onlineCages = new ArrayList<>();
+
+    public static void buildCage(Cage cage) {
+        
     }
 }

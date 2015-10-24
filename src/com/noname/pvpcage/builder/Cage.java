@@ -7,19 +7,26 @@ import org.bukkit.Location;
 
 public abstract class Cage {
 
+    public abstract CageCuboid calculateCuboid();
     public abstract void onCreateBattle(Location loc);
-
-    public abstract void onEndBattle(User winner);
+    public abstract void onRemoveBattle();
+    
     protected List<Location> blocks = new ArrayList<>();
 
     private CageType cageType;
+    private CageCuboid cageCuboid;
 
     public Cage(CageType cageType) {
         this.cageType = cageType;
+        calculateCuboid();
     }
 
     public CageType getCageType() {
         return cageType;
+    }
+    
+    public CageCuboid getCageCuboid() {
+        return cageCuboid;
     }
 
     protected String desLocation(Location loc) {
