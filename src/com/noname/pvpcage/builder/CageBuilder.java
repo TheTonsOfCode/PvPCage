@@ -2,8 +2,10 @@ package com.noname.pvpcage.builder;
 
 import com.noname.pvpcage.utilities.generators.SchemeRecipment;
 import com.noname.pvpcage.utilities.generators.SchemeStruct;
-import com.noname.pvpcage.builder.cage.WalledCage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import net.minecraft.util.org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
 import org.bukkit.Location;
@@ -37,6 +39,26 @@ public class CageBuilder {
         createSpawnPlatform();
 
         return newWorld;
+    }
+    
+    public static boolean deleteCageWorld() {
+        Location mainWorld = Bukkit.getWorlds().get(0).getSpawnLocation();
+        
+        World cgWorld = getCageWorld();
+        for(Player p: Bukkit.getOnlinePlayers()){
+            if(p.getWorld() == cgWorld){
+                p.teleport(mainWorld);
+            }
+        }
+
+        try { 
+            Bukkit.getServer().unloadWorld(CAGE_WORLD, true);
+            File f = new File(new File(".").getAbsolutePath() + File.separator + CAGE_WORLD);
+            FileUtils.deleteDirectory(f);
+            return true;
+        } catch (IOException ex) {
+            return false;
+        }
     }
 
     private static void createSpawnPlatform() {
@@ -106,7 +128,7 @@ public class CageBuilder {
     }
     
     private static ArrayList<Cage> onlineCages = new ArrayList<>();
-    private static ArrayList<Location> possibleCagesLocs;
+    private static ArrayList<Point> possibleCagesLocs;
     static {
         onlineCages.add(new Cage(CageType.WALLS) {          
             @Override
@@ -126,7 +148,7 @@ public class CageBuilder {
     
     private static void genPossibleCagesLocs(int size) {
         possibleCagesLocs = new ArrayList();
-        Location sp = getCageWorld().getSpawnLocation().add(1, 20, 1);
+        Location sp = getCageWorld().getSpawnLocation();
         
         double o = 0D;
         double locationToSpawn = 0D, slice = 0D;
@@ -141,10 +163,8 @@ public class CageBuilder {
                 slice = (2 * 3.14) / ((double) MAX);
             }
             possibleCagesLocs.add(
-                    new Location(
-                            sp.getWorld(),
+                    new Point(
                             sp.getX() + locationToSpawn * Math.sin(i * slice),
-                            sp.getY(),
                             sp.getZ() + locationToSpawn * Math.cos(i * slice)
                     )
             );
@@ -157,6 +177,16 @@ public class CageBuilder {
         }
     }
     
+    public static final int BUILD_Y = 32;
+    private static class Point { 
+        public double x, z;
+        
+        Point (double x, double z) {
+            this.x = x;
+            this.z = z;
+        }
+    }
+    
     public static void buildCage(Cage cage) {
         if(onlineCages.size() == possibleCagesLocs.size()) {
             genPossibleCagesLocs(possibleCagesLocs.size() + 10);
@@ -164,7 +194,8 @@ public class CageBuilder {
 
         Location target = null;
         
-        for(Location l: possibleCagesLocs) {
+        for(Point p: possibleCagesLocs) {
+            Location l = new Location(getCageWorld(), p.x, BUILD_Y, p.z);
             cage.calculateCuboid(l);
             boolean collide = false;
             CageCuboid cc = cage.getCageCuboid();

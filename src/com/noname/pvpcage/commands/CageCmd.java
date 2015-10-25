@@ -29,6 +29,17 @@ public class CageCmd extends Command {
                     send("&aPrzteleportowano do Cage World'u!");
                 }  
         });
+        addSubCommand(new SubCommand("delWorld", "usuwa cage world'a", "dw") {
+                @Override
+                protected void execute() {
+                    if(CageBuilder.deleteCageWorld()) {
+                        CageBuilder.createCageWorld();
+                        send("&eUsunieto &7Cage World!");
+                        return;
+                    }
+                    send("&aNie odnaleziono Cage World'u!");
+                }  
+        });
         addSubCommand(new SubCommand("cc", "buduje 32 klatki", "") {
                 @Override
                 protected void execute() {
