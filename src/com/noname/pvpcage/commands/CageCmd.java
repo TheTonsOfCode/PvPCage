@@ -29,6 +29,15 @@ public class CageCmd extends Command {
                     send("&aPrzteleportowano do Cage World'u!");
                 }  
         });
+        addSubCommand(new SubCommand("cc", "buduje 32 klatki", "") {
+                @Override
+                protected void execute() {
+                    for (int j = 0; j < 32 ;j++) {
+                        CageBuilder.buildCage(new WalledCage());
+                    }
+                    send("&aStworzono 32 klatki!");
+                }  
+        });
     }
 
     @Override

@@ -20,8 +20,8 @@ public class WalledCage extends Cage {
     }
     
     @Override
-    public CageCuboid calculateCuboid() {
-        return new CageCuboid(SIZE);
+    public void calculateCuboid(Location loc) {
+        cageCuboid = new CageCuboid(loc, SIZE);
     }
 
     @Override

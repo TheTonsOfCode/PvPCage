@@ -48,6 +48,6 @@ public class CageCuboid {
         int bLZ = cc.lower.getBlockZ();
         int bUX = cc.upper.getBlockX();
         int bUZ = cc.upper.getBlockZ();
-        return ((bLX >= aLX && bLX <= aUX) || (bUX >= aLX && bUX <= aUX)) && ((bLZ >= aLZ && bLZ <= aUZ) || (bUZ >= aLZ && bUZ <= aUZ));
+        return ((aLX >= bLX && aLX <= bUX) || (aUX >= bLX && aUX <= bUX)) && ((aLZ >= bLZ && aLZ <= bUZ) || (aUZ >= bLZ && aUZ <= bUZ));
     }
 }

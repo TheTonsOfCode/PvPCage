@@ -1,4 +1,4 @@
-package com.noname.pvpcage.utilities.DataStorage;
+package com.noname.pvpcage.utilities.data;
 
 import com.noname.pvpcage.utilities.Configuration;
 import java.sql.Connection;
