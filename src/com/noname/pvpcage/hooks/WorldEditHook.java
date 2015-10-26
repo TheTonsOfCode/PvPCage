@@ -1,12 +1,13 @@
 package com.noname.pvpcage.hooks;
 
+import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import org.bukkit.plugin.PluginManager;
 
-public class WorldEditHook<WorldEditPlugin> extends Hook {
+public class WorldEditHook extends Hook {
     
-    private WorldEditPlugin hook;
+    private static WorldEditPlugin hook;
     
-    public WorldEditPlugin getWorldGuard() {
+    public static WorldEditPlugin getWorldEdit() {
         return hook;
     }
 
