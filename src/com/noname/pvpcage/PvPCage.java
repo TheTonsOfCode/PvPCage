@@ -2,7 +2,8 @@ package com.noname.pvpcage;
 
 import com.noname.pvpcage.utilities.Configuration;
 import com.noname.pvpcage.utilities.MessageManager;
-import com.noname.pvpcage.utilities.Utils;
+import com.noname.pvpcage.utilities.instance.PIBukkitListeners;
+import com.noname.pvpcage.utilities.instance.PICommand;
 import de.slikey.effectlib.EffectManager;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -24,7 +25,8 @@ public class PvPCage extends JavaPlugin {
         saveDefaultConfig();
         Configuration.loadConfiguration();
 
-        Utils.registerCommands(this, "com.noname.pvpcage.commands");
+        new PICommand(this).instanceAllAt("com.noname.pvpcage.commands");
+        new PIBukkitListeners(this).instanceAllAt("com.noname.pvpcage.listeners");
     }
 
     public void onDisable() {
