@@ -1,7 +1,6 @@
 package com.noname.pvpcage.utilities.instance;
 
 import com.noname.pvpcage.objects.Command;
-import static com.noname.pvpcage.utilities.Utils.registerCommand;
 import java.lang.reflect.Field;
 import java.util.logging.Logger;
 import org.bukkit.Bukkit;
