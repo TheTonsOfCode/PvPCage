@@ -18,7 +18,7 @@ public class Configuration {
     public static int PARTY_NAME_LENTH;
     public static int PARTY_MAX_MEMBERS;
 
-    
+    public static int LOGGER_LEVEL;
     
     public static String HOST;
     public static String PASSWORD;
