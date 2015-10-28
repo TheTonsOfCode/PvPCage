@@ -1,0 +1,67 @@
+package com.noname.pvpcage.reflect;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import org.bukkit.inventory.ItemStack;
+
+public class ReflConstants {
+
+    public static final Method getWorld = ReflectUTIL.getMethod(ReflectUTIL.getCraftClass("CraftWorld"), "getHandle", new Class[0]);
+    public static final Method getTypeWorld = ReflectUTIL.getMethod(ReflectUTIL.getMCClass("World"), "getType", new Class[]{Integer.TYPE, Integer.TYPE, Integer.TYPE});
+    public static final Method setHealth = ReflectUTIL.getMethod(ReflectUTIL.getMCClass("EntityLiving"), "setHealth", new Class[]{Float.TYPE});
+    public static final Method setCustomName = ReflectUTIL.getMethod(ReflectUTIL.getMCClass("EntityInsentient"), "setCustomName", new Class[]{String.class});
+    public static final Method getCustomName = ReflectUTIL.getMethod(ReflectUTIL.getMCClass("EntityInsentient"), "getCustomName", new Class[0]);
+    public static final Method setCustomNameVisible = ReflectUTIL.getMethod(ReflectUTIL.getMCClass("EntityInsentient"), "setCustomNameVisible", new Class[]{Boolean.TYPE});
+    public static final Method setLocation = ReflectUTIL.getMethod(ReflectUTIL.getMCClass("Entity"), "setLocation", new Class[]{Double.TYPE, Double.TYPE, Double.TYPE, Float.TYPE, Float.TYPE});
+    public static final Method getId = ReflectUTIL.getMethod(ReflectUTIL.getMCClass("Entity"), "getId", new Class[0]);
+    public static final Method getDataWatcher = ReflectUTIL.getMethod(ReflectUTIL.getMCClass("Entity"), "getDataWatcher", new Class[0]);
+    public static final Method setAge = ReflectUTIL.getMethod(ReflectUTIL.getMCClass("EntityAgeable"), "setAge", new Class[]{Integer.TYPE});
+    public static final Method setSaddle = ReflectUTIL.getMethod(ReflectUTIL.getMCClass("EntityPig"), "setSaddle", new Class[]{Boolean.TYPE});
+    public static final Method setSneaking = ReflectUTIL.getMethod(ReflectUTIL.getMCClass("Entity"), "setSneaking", new Class[]{Boolean.TYPE});
+    public static final Method setCatType = ReflectUTIL.getMethod(ReflectUTIL.getMCClass("EntityOcelot"), "setCatType", new Class[]{Integer.TYPE});
+    public static final Method setColor = ReflectUTIL.getMethod(ReflectUTIL.getMCClass("EntitySheep"), "setColor", new Class[]{Integer.TYPE});
+    public static final Method setSheared = ReflectUTIL.getMethod(ReflectUTIL.getMCClass("EntitySheep"), "setSheared", new Class[]{Boolean.TYPE});
+    public static final Method setProfession = ReflectUTIL.getMethod(ReflectUTIL.getMCClass("EntityVillager"), "setProfession", new Class[]{Integer.TYPE});
+    public static final Method setVillager = ReflectUTIL.getMethod(ReflectUTIL.getMCClass("EntityZombie"), "setVillager", new Class[]{Boolean.TYPE});
+    public static final Method setBaby = ReflectUTIL.getMethod(ReflectUTIL.getMCClass("EntityZombie"), "setBaby", new Class[]{Boolean.TYPE});
+    public static final Method setPowered = ReflectUTIL.getMethod(ReflectUTIL.getMCClass("EntityCreeper"), "setPowered", new Class[]{Boolean.TYPE});
+    public static final Method setSize = ReflectUTIL.getMethod(ReflectUTIL.getMCClass("EntitySlime"), "setSize", new Class[]{Integer.TYPE});
+    public static final Method setHasChest = ReflectUTIL.getMethod(ReflectUTIL.getMCClass("EntityHorse"), "setHasChest", new Class[]{Boolean.TYPE});
+    public static final Method setVariant = ReflectUTIL.getMethod(ReflectUTIL.getMCClass("EntityHorse"), "setVariant", new Class[]{Integer.TYPE});
+    public static final Method setAngryWolf = ReflectUTIL.getMethod(ReflectUTIL.getMCClass("EntityWolf"), "setAngry", new Class[]{Boolean.TYPE});
+    public static final Method setTamedWolf = ReflectUTIL.getMethod(ReflectUTIL.getMCClass("EntityWolf"), "setTamed", new Class[]{Boolean.TYPE});
+    public static final Method setCollarColor = ReflectUTIL.getMethod(ReflectUTIL.getMCClass("EntityWolf"), "setCollarColor", new Class[]{Integer.TYPE});
+    public static final Method setSkeletonType = ReflectUTIL.getMethod(ReflectUTIL.getMCClass("EntitySkeleton"), "setSkeletonType", new Class[]{Integer.TYPE});
+    public static final Constructor packet_PacketPlayOutSpawnEntity = ReflectUTIL.getConstructor(ReflectUTIL.getMCClass("PacketPlayOutSpawnEntity"), new Class[]{ReflectUTIL.getMCClass("Entity"), Integer.TYPE, Integer.TYPE});
+    public static final Constructor packet_PacketPlayOutNamedSoundEffect = ReflectUTIL.getConstructor(ReflectUTIL.getMCClass("PacketPlayOutNamedSoundEffect"), new Class[]{String.class, Double.TYPE, Double.TYPE, Double.TYPE, Float.TYPE, Float.TYPE});
+    public static final Constructor packet_PacketPlayOutSpawnEntityLiving = ReflectUTIL.getConstructor(ReflectUTIL.getMCClass("PacketPlayOutSpawnEntityLiving"), new Class[]{ReflectUTIL.getMCClass("EntityLiving")});
+    public static final Constructor packet_PacketPlayOutEntityMetadata = ReflectUTIL.getConstructor(ReflectUTIL.getMCClass("PacketPlayOutEntityMetadata"), new Class[]{Integer.TYPE, ReflectUTIL.getMCClass("DataWatcher"), Boolean.TYPE});
+    public static final Constructor packet_PacketPlayOutEntityTeleport = ReflectUTIL.getConstructor(ReflectUTIL.getMCClass("PacketPlayOutEntityTeleport"), new Class[]{ReflectUTIL.getMCClass("Entity")});
+    public static final Constructor packet_PacketPlayOutEntityHeadRotation = ReflectUTIL.getConstructor(ReflectUTIL.getMCClass("PacketPlayOutEntityHeadRotation"), new Class[]{ReflectUTIL.getMCClass("Entity"), Byte.TYPE});
+    public static final Constructor packet_PacketPlayOutEntityLook = ReflectUTIL.getConstructor(ReflectUTIL.getMCClass("PacketPlayOutEntityLook"), new Class[]{Integer.TYPE, Byte.TYPE, Byte.TYPE, Boolean.TYPE});
+    public static final Constructor packet_PacketPlayOutEntityVelocity = ReflectUTIL.getConstructor(ReflectUTIL.getMCClass("PacketPlayOutEntityVelocity"), new Class[]{ReflectUTIL.getMCClass("Entity")});
+    public static final Constructor packet_PacketPlayOutEntityVelocity2 = ReflectUTIL.getConstructor(ReflectUTIL.getMCClass("PacketPlayOutEntityVelocity"), new Class[]{Integer.TYPE, Double.TYPE, Double.TYPE, Double.TYPE});
+    public static final Constructor packet_PacketPlayOutEntityDestroy = ReflectUTIL.getConstructor(ReflectUTIL.getMCClass("PacketPlayOutEntityDestroy"), new Class[]{int[].class});
+    public static final Constructor packet_PacketPlayOutAttachEntity = ReflectUTIL.getConstructor(ReflectUTIL.getMCClass("PacketPlayOutAttachEntity"), new Class[]{Integer.TYPE, ReflectUTIL.getMCClass("Entity"), ReflectUTIL.getMCClass("Entity")});
+    public static final Constructor packet_PacketPlayOutExperience = ReflectUTIL.getConstructor(ReflectUTIL.getMCClass("PacketPlayOutExperience"), new Class[]{Float.TYPE, Integer.TYPE, Integer.TYPE});
+    public static final Constructor packet_PacketPlayOutScoreboardObjective = ReflectUTIL.getConstructor(ReflectUTIL.getMCClass("PacketPlayOutScoreboardObjective"), new Class[0]);
+    public static final Constructor packet_PacketPlayOutScoreboardScore = ReflectUTIL.getConstructor(ReflectUTIL.getMCClass("PacketPlayOutScoreboardScore"), new Class[0]);
+    public static final Constructor packet_PacketPlayOutScoreboardDisplayObjective = ReflectUTIL.getConstructor(ReflectUTIL.getMCClass("PacketPlayOutScoreboardDisplayObjective"), new Class[0]);
+    public static final Constructor packet_PacketPlayOutEntityEquipment = ReflectUTIL.getConstructor(ReflectUTIL.getMCClass("PacketPlayOutEntityEquipment"), new Class[]{Integer.TYPE, Integer.TYPE, ReflectUTIL.getMCClass("ItemStack")});
+    public static final Constructor packet_PacketPlayOutAnimation = ReflectUTIL.getConstructor(ReflectUTIL.getMCClass("PacketPlayOutAnimation"), new Class[]{ReflectUTIL.getMCClass("Entity"), Integer.TYPE});
+    public static final Constructor EntityVillager = ReflectUTIL.getConstructor(ReflectUTIL.getMCClass("EntityVillager"), new Class[]{ReflectUTIL.getMCClass("World")});
+    public static final Constructor EntityEnderDragon = ReflectUTIL.getConstructor(ReflectUTIL.getMCClass("EntityEnderDragon"), new Class[]{ReflectUTIL.getMCClass("World")});
+    public static final Constructor packet_PacketPlayInClientCommand = ReflectUTIL.getConstructor(ReflectUTIL.getMCClass("PacketPlayInClientCommand"), new Class[]{ReflectUTIL.getMCClass("EnumClientCommand")});
+    public static final Constructor EntityHorse = ReflectUTIL.getConstructor(ReflectUTIL.getMCClass("EntityHorse"), new Class[]{ReflectUTIL.getMCClass("World")});
+    public static final Constructor EntityWitherSkull = ReflectUTIL.getConstructor(ReflectUTIL.getMCClass("EntityWitherSkull"), new Class[]{ReflectUTIL.getMCClass("World")});
+    public static final Constructor NBTTagCompound = ReflectUTIL.getConstructor(ReflectUTIL.getMCClass("NBTTagCompound"), new Class[0]);
+    public static final Constructor NBTTagList = ReflectUTIL.getConstructor(ReflectUTIL.getMCClass("NBTTagList"), new Class[0]);
+    public static final Class ItemStack = ReflectUTIL.getMCClass("ItemStack");
+    public static final Method hasTag = ReflectUTIL.getMethod(ItemStack, "hasTag", new Class[0]);
+    public static final Method NBTTagList_set = ReflectUTIL.getMethod(ReflectUTIL.getMCClass("NBTTagCompound"), "set", new Class[]{String.class, ReflectUTIL.getMCClass("NBTBase")});
+    public static final Method setTag = ReflectUTIL.getMethod(ItemStack, "setTag", new Class[]{ReflectUTIL.getMCClass("NBTTagCompound")});
+    public static final Method getTag = ReflectUTIL.getMethod(ItemStack, "getTag", new Class[0]);
+    public static final Method asCraftMirror = ReflectUTIL.getMethod(ReflectUTIL.getCraftClass("inventory.CraftItemStack"), "asCraftMirror", new Class[]{ItemStack});
+    public static final Method asNMSCopy = ReflectUTIL.getMethod(ReflectUTIL.getCraftClass("inventory.CraftItemStack"), "asNMSCopy", new Class[]{ItemStack.class});
+    public static final Method getEntityPlayer = ReflectUTIL.getMethod(ReflectUTIL.getCraftClass("entity.CraftPlayer"), "getHandle", new Class[0]);
+}
