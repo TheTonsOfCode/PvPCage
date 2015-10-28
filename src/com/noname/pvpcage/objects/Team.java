@@ -1,5 +1,6 @@
 package com.noname.pvpcage.objects;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,12 +14,22 @@ public class Team {
     private String tag;
     private String name;
     private User leader;
-
+    private User mod;
+    private List<User> invited = new ArrayList<>();
     public Team() {
         MAX_SIZE = 5;
         tag = "";
         name = "";
         leader = null;
+        mod = null;
+    }
+
+    public User getMod() {
+        return mod;
+    }
+
+    public void setMod(User mod) {
+        this.mod = mod;
     }
 
     public int getMAX_SIZE() {

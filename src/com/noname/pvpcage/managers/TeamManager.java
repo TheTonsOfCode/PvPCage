@@ -2,8 +2,13 @@ package com.noname.pvpcage.managers;
 
 import com.noname.pvpcage.objects.Team;
 import com.noname.pvpcage.objects.User;
+import com.noname.pvpcage.utilities.Log;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 
 /**
  *
@@ -48,5 +53,20 @@ public class TeamManager {
         }
         return null;
     }
+
+    public static void loadTeamsFromFile() {
+        int load = 0;
+        for (File f : FileManager.getPartyData().listFiles()) {
+            FileConfiguration yml = YamlConfiguration.loadConfiguration(f);
+            Team t = new Team();
+            t.setTag(yml.getString("Tag"));
+            t.setLeader(UserManager.getUser(UUID.fromString(yml.getString("Leader.Uuid"))));
+            t.setMod(UserManager.getUser(UUID.fromString(yml.getString("Mod.Uuid"))));
+            t.setName(yml.getString("Name"));
+            load++;
+        }
+        Log.INFO.print("&2Zaladowano: &6&l" + load + "&r&2 Teamow");
+    }
+    
 
 }
