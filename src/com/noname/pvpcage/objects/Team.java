@@ -18,7 +18,7 @@ public class Team {
         MAX_SIZE = 5;
         tag = "";
         name = "";
-
+        leader = null;
     }
 
     public int getMAX_SIZE() {
