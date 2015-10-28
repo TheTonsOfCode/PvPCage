@@ -1,7 +1,5 @@
 package com.noname.pvpcage.Test;
 
-import com.noname.pvpcage.reflect.ReflConstants;
-import com.noname.pvpcage.reflect.ReflectUTIL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

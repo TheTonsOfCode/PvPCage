@@ -38,25 +38,25 @@ public class Listeners implements Listener {
 //                }
                 System.out.println("4");
                 User u = UserManager.getUser(p.getUniqueId());
-                for (Item item : u.getSelectedItems()) {
-                    if (e.getClick().equals(ClickType.LEFT)) {
-                        System.out.println("5");
-                        if (e.getCurrentItem().getItemMeta() == null
-                                || !e.getCurrentItem().getItemMeta().getLore().contains("§3Enchanty:")
-                                || e.getCurrentItem().getType() != item.getMat()) {
-                            return;
-                        }
-                        System.out.println("6");
-                        System.out.println("akcja: " + e.getAction());
-                        if (item.isGlow()) {
-                            item.setAmount(item.getAmount() + 1);
-                            System.out.println(item.getMat() + " " + item.isGlow());
-                        } else {
-                            Log.DEBUG.print("Nie swiecil sie ale go zaswiece");
-                            item.setGlow(true);
-                            System.out.println(item.getMat() + " " + item.isGlow());
-                        }
-                    }
+//                for (Item item : u.getSelectedItems()) {
+//                    if (e.getClick().equals(ClickType.LEFT)) {
+//                        System.out.println("5");
+//                        if (e.getCurrentItem().getItemMeta() == null
+//                                || !e.getCurrentItem().getItemMeta().getLore().contains("§3Enchanty:")
+//                                || e.getCurrentItem().getType() != item.getMat()) {
+//                            return;
+//                        }
+//                        System.out.println("6");
+//                        System.out.println("akcja: " + e.getAction());
+//                        if (item.isGlow()) {
+//                            item.setAmount(item.getAmount() + 1);
+//                            System.out.println(item.getMat() + " " + item.isGlow());
+//                        } else {
+//                            Log.DEBUG.print("Nie swiecil sie ale go zaswiece");
+//                            item.setGlow(true);
+//                            System.out.println(item.getMat() + " " + item.isGlow());
+//                        }
+//                    }
                     p.closeInventory();
                     ItemManager.createInventory(p);
                     e.setCancelled(true);
@@ -69,13 +69,13 @@ public class Listeners implements Listener {
 
     }
 
-    @EventHandler
-    void InvClose(InventoryCloseEvent e) {
-        if ((e.getPlayer() instanceof Player)) {
-            Player p = (Player) e.getPlayer();
-            if (vievers.contains(p.getName())) {
-                vievers.remove(p.getName());
-            }
-        }
-    }
-}
+//    @EventHandler
+//    void InvClose(InventoryCloseEvent e) {
+//        if ((e.getPlayer() instanceof Player)) {
+//            Player p = (Player) e.getPlayer();
+//            if (vievers.contains(p.getName())) {
+//                vievers.remove(p.getName());
+//            }
+//        }
+//    }
+
