@@ -4,9 +4,12 @@ import com.noname.pvpcage.objects.Team;
 import com.noname.pvpcage.objects.User;
 import com.noname.pvpcage.utilities.Log;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -66,6 +69,28 @@ public class TeamManager {
             load++;
         }
         Log.INFO.print("&2Zaladowano: &6&l" + load + "&r&2 Teamow");
+    }
+    
+    public static void saveTeamtoFile(){
+        int saved = 0;
+        for(Team t : teams){
+            File f = new File(FileManager.getPartyData(),t.getTag()+".yml");
+            if(!f.exists()){
+                try {
+                    f.createNewFile();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            FileConfiguration yml = YamlConfiguration.loadConfiguration(f);
+            yml.set("Name", t.getMod());
+            yml.set("Tag",t.getTag());
+            yml.set("Leader",t.getLeader());
+            yml.set("Mod",t.getMod());
+            yml.set("Members",t.getMembers());
+            saved++;
+        }
+        Log.INFO.print("&2Zapisano: &6&l" + saved + "&r&2 Teamow");
     }
     
 

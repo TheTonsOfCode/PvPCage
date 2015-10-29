@@ -13,8 +13,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -59,6 +57,9 @@ public class User {
         selectedItem = ItemManager.getItems();
     }
 
+    public void setVictims(List<String> victims){
+        this.victims = victims;
+    }
     public List<String> getVictims() {
         return victims;
     }
@@ -250,7 +251,7 @@ public class User {
      private List<Item> selectedItem = new ArrayList<>();
      */
     public void saveToFile() {
-        File f = new File(FileManager.getUserData(), "");
+        File f = new File(FileManager.getUserData(), uuid + ".yml");
         if (!f.exists()) {
             try {
                 f.createNewFile();
@@ -276,7 +277,7 @@ public class User {
     }
 
     public void loadFromFile() {
-        File f = new File(FileManager.getUserData(), "");
+        File f = new File(FileManager.getUserData(), uuid + ".yml");
         if (!f.exists()) {
             return;
         }
