@@ -18,7 +18,7 @@ public class MySQL {
             e.printStackTrace();
         }
         try {
-            createTable();
+            Table.USERS.createTable();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -47,29 +47,7 @@ public class MySQL {
         }
     }
 
-    public void createTable() {
-        StringBuilder table = new StringBuilder();
-        table.append("CREATE TABLE IF NOT EXISTS `UserDataPvPCage` (")
-                .append("`id` INT(6) NOT NULL AUTO_INCREMENT, ")
-                .append("`uuid` VARCHAR(36) NOT NULL UNIQUE, ")
-                .append("`name` VARCHAR(20) NOT NULL UNIQUE, ")
-                .append("`loseduel` INT(12), ")
-                .append("`winduel` INT(12), ")
-                .append("`escapeduel` INT(12), ")
-                .append("`points` INT(12), ")
-                .append("`victims` VARCHAR(100), ")
-                .append("PRIMARY KEY (`id`), ")
-                .append("KEY (`name`, `uuid`))");
-        PreparedStatement st = null;
-        try {
-            st = connection.prepareStatement(table.toString());
-            st.executeUpdate();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        table.setLength(0);
-        table.append("");
-    }
+
 
     public void remove(String name) {
         if (!hasConnection()) {
