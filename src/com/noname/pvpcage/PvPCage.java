@@ -1,7 +1,9 @@
 package com.noname.pvpcage;
 
+import com.noname.pvpcage.managers.FileManager;
 import com.noname.pvpcage.utilities.Configuration;
 import com.noname.pvpcage.utilities.MessageManager;
+import com.noname.pvpcage.utilities.data.MySQL;
 import com.noname.pvpcage.utilities.instance.PIBukkitListeners;
 import com.noname.pvpcage.utilities.instance.PICommand;
 import de.slikey.effectlib.EffectManager;
@@ -17,21 +19,30 @@ public class PvPCage extends JavaPlugin {
     private static PvPCage instance;
     private static MessageManager msgManager;
     private static EffectManager effectManager;
+    private static MySQL sql;
+
 
     public void onEnable() {
         instance = this;
         msgManager = new MessageManager();
         effectManager = new EffectManager(instance);
+        FileManager.checkFiles();
         saveDefaultConfig();
         Configuration.loadConfiguration();
+        sql = new MySQL();
 
         new PICommand(this).instanceAllAt("com.noname.pvpcage.commands");
         new PIBukkitListeners(this).instanceAllAt("com.noname.pvpcage.listeners");
+
     }
 
     public void onDisable() {
         effectManager.dispose();
 //        HandlerList.unregisterAll((Listener) this);
+    }
+
+    public static MySQL getMySQL() {
+        return sql;
     }
 
     public static EffectManager getEffectManager() {
