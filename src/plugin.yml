@@ -3,7 +3,7 @@ main: com.noname.pvpcage.PvPCage
 version: 0.0.0.1
 description: PVPArena
 authors: [dekros987, TheTonsOfCode]
-#depend: [ProtocolLib]
+depend: [EffectLib]
 commands:
     test:
         description: testuje
