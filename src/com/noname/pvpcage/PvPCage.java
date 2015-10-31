@@ -4,6 +4,7 @@ import com.noname.pvpcage.managers.FileManager;
 import com.noname.pvpcage.utilities.Configuration;
 import com.noname.pvpcage.utilities.MessageManager;
 import com.noname.pvpcage.utilities.data.MySQL;
+import com.noname.pvpcage.utilities.data.Table;
 import com.noname.pvpcage.utilities.instance.PIBukkitListeners;
 import com.noname.pvpcage.utilities.instance.PICommand;
 import de.slikey.effectlib.EffectManager;
@@ -29,11 +30,11 @@ public class PvPCage extends JavaPlugin {
         FileManager.checkFiles();
         saveDefaultConfig();
         Configuration.loadConfiguration();
-        sql = new MySQL();
+//        sql = new MySQL();
 
         new PICommand(this).instanceAllAt("com.noname.pvpcage.commands");
         new PIBukkitListeners(this).instanceAllAt("com.noname.pvpcage.listeners");
-
+        System.out.println(Table.USERS.loadCreateQuery());
     }
 
     public void onDisable() {
