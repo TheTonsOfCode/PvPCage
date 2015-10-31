@@ -1,9 +1,7 @@
 package com.noname.pvpcage.utilities.data;
 
 import com.noname.pvpcage.PvPCage;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import com.noname.pvpcage.utilities.Utils;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -31,19 +29,6 @@ public enum Table {
     }
 
     public String loadCreateQuery() {
-        String queryName = createQueryName + ".sql", query = "";
-        try {
-            String line;
-            InputStream is = getClass().getClassLoader().getResourceAsStream(queryName);
-            BufferedReader input = new BufferedReader(new InputStreamReader(is));
-            while ((line = input.readLine()) != null) {
-                query += line;
-            }
-            input.close();
-            return query;
-        } catch (Exception err) {
-            err.printStackTrace();
-        }
-        return null;
+        return Utils.loadQuery(createQueryName + ".sql");
     }
 }

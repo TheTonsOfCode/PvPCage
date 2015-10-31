@@ -18,7 +18,6 @@ public enum Log {
     
     public void print(String msg) {
         print(this, msg);
-        //dsad
     }
 
     private static final ConsoleCommandSender console = PvPCage.getInstance().getServer().getConsoleSender();

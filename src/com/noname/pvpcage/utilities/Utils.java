@@ -3,6 +3,9 @@ package com.noname.pvpcage.utilities;
 import com.noname.pvpcage.PvPCage;
 import de.slikey.effectlib.effect.TextEffect;
 import de.slikey.effectlib.util.ParticleEffect;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import org.bukkit.ChatColor;
@@ -35,5 +38,22 @@ public class Utils {
             colors.add(fixColor(s));
         }
         return colors;
+    }
+    
+    public static String loadQuery(String queryName) {
+        String query = "";
+        try {
+            String line;
+            InputStream is = new Utils().getClass().getClassLoader().getResourceAsStream(queryName);
+            BufferedReader input = new BufferedReader(new InputStreamReader(is));
+            while ((line = input.readLine()) != null) {
+                query += line;
+            }
+            input.close();
+            return query;
+        } catch (Exception err) {
+            err.printStackTrace();
+        }
+        return null;
     }
 }
