@@ -252,7 +252,6 @@ public class User {
                 e.printStackTrace();
             }
         }
-
         PreparedStatement st = null;
         StringBuilder query = new StringBuilder();
         query.append("INSERT INTO `UserDataPvPCage` (`uuid`, `name`, `team`, `loseduel`, `winduel`,`escapeduel`,`points`)")
