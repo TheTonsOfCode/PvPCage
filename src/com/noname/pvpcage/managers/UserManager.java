@@ -2,14 +2,12 @@ package com.noname.pvpcage.managers;
 
 import com.noname.pvpcage.objects.User;
 import com.noname.pvpcage.utilities.Log;
-import com.sk89q.worldedit.util.YAMLConfiguration;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -20,6 +18,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 public class UserManager {
 
     public static List<User> users = new ArrayList<>();
+
+
 
     public static void addUser(User u) {
         users.add(u);

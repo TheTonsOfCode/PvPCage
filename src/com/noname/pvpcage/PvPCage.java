@@ -22,7 +22,6 @@ public class PvPCage extends JavaPlugin {
     private static EffectManager effectManager;
     private static MySQL sql;
 
-
     public void onEnable() {
         instance = this;
         msgManager = new MessageManager();
@@ -30,7 +29,7 @@ public class PvPCage extends JavaPlugin {
         FileManager.checkFiles();
         saveDefaultConfig();
         Configuration.loadConfiguration();
-//        sql = new MySQL();
+        sql = new MySQL();
 
         new PICommand(this).instanceAllAt("com.noname.pvpcage.commands");
         new PIBukkitListeners(this).instanceAllAt("com.noname.pvpcage.listeners");

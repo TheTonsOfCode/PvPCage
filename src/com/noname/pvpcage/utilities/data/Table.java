@@ -9,9 +9,10 @@ import java.sql.SQLException;
 
 public enum Table {
 
-    DEATHS(""),
-    TEAMS(""),
-    USERS("createUsers");
+    DEATHS("createDeaths"),
+    TEAMS("createTeams"),
+    USERS("createUsers"),
+    TEAM_MEMBERS("createMembers");
     
     private String createQueryName;
 

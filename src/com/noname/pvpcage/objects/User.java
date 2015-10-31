@@ -4,6 +4,7 @@ import com.noname.pvpcage.PvPCage;
 import com.noname.pvpcage.Test.Item;
 import com.noname.pvpcage.Test.ItemManager;
 import com.noname.pvpcage.managers.FileManager;
+import com.noname.pvpcage.utilities.data.Table;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
@@ -32,7 +33,7 @@ public class User {
     private long lastSave;
     private String team;
     private long lastSeen;// to check if somethink....
-    private List<String> victims = new ArrayList<>();
+    private List<User> victims = new ArrayList<>();
     private Player player;
     private List<Item> selectedItem = new ArrayList<>();
 
@@ -57,22 +58,23 @@ public class User {
         selectedItem = ItemManager.getItems();
     }
 
-    public void setVictims(List<String> victims){
+    public void setVictims(List<User> victims) {
         this.victims = victims;
     }
-    public List<String> getVictims() {
+
+    public List<User> getVictims() {
         return victims;
     }
 
-    public void addVictim(String uuid) {
-        if (!this.victims.contains(uuid)) {
-            this.victims.add(uuid);
+    public void addVictim(User u) {
+        if (!this.victims.contains(u)) {
+            this.victims.add(u);
         }
     }
 
-    public void removeVictim(String uuid) {
-        if (this.victims.contains(uuid)) {
-            this.victims.remove(uuid);
+    public void removeVictim(User u) {
+        if (this.victims.contains(u)) {
+            this.victims.remove(u);
         }
     }
 
@@ -156,19 +158,59 @@ public class User {
         this.lastSave = lastSave;
     }
 
-    private String victimsToString() {
-        String s = null;
-        for (String name : victims) {
-            s = name + ",";
+    private void loadVictims() {
+        Connection conn = PvPCage.getMySQL().getConnection();
+        if (conn == null) {
+            try {
+                conn = PvPCage.getMySQL().openConnection();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        return s;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = conn.prepareStatement("SELECT * FROM `VictimsDataPvPCage` WHERE `killer_uuid`=?");//change names and where `somethink`
+            st.setString(1, uuid.toString());
+            rs = st.executeQuery();
+            if (rs.next()) {
+                User u = new User(UUID.fromString(rs.getString("victim_uuid")));
+                u.loadFromMySQL();
+                victims.add(u);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        PvPCage.getMySQL().closeResources(rs, st);
+       
     }
 
-    private void stringToVictims(String s) {
-        String[] name = s.split(",");
-        for (String name1 : name) {
-            victims.add(name1);
+    private void saveVictims() {
+        Connection conn = PvPCage.getMySQL().getConnection();
+        if (conn == null) {
+            try {
+                conn = PvPCage.getMySQL().openConnection();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+
+        PreparedStatement st = null;
+        StringBuilder query = new StringBuilder();
+        query.append("INSERT INTO `VictimsDataPvPCage` (`killer_uuid`, `victim_uuid`)")
+                .append("VALUES (?,?) ON DUPLICATE KEY UPDATE ")
+                .append("`killer_uuid`=VALUES(`killer_uuid`), `victim_uuid`=VALUES(`victim_uuid`)");
+        try {
+            for (User victim : victims) {
+                st.addBatch(query.toString());
+                st.setString(1, uuid.toString());
+                st.setString(2, victim.getUuid().toString());
+            }
+            st.executeBatch();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        PvPCage.getMySQL().closeResources(null, st);
     }
 
     public void loadFromMySQL() {
@@ -193,7 +235,6 @@ public class User {
                 winDuel = rs.getInt("winduel");
                 escapeDuel = rs.getInt("escapeduel");
                 points = rs.getInt("points");
-                stringToVictims(rs.getString("victims"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -213,12 +254,11 @@ public class User {
 
         PreparedStatement st = null;
         StringBuilder query = new StringBuilder();
-        query.append("INSERT INTO `UserDataPvPCage` (`uuid`, `name`, `team`, `loseduel`, `winduel`,`escapeduel`,`points`, `victims`)")
-                .append("VALUES (?,?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE ")
+        query.append("INSERT INTO `UserDataPvPCage` (`uuid`, `name`, `team`, `loseduel`, `winduel`,`escapeduel`,`points`)")
+                .append("VALUES (?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE ")
                 .append(" `uuid`=VALUES(`uuid`), `name`=VALUES(`name`), `team`=VALUES(`team`), ")
                 .append("`loseduel`=VALUES(`loseduel`), `winduel`=VALUES(`winduel`),")
-                .append("`escapeduel`=VALUES(`escapeduel`), `points`=VALUES(`points`),")
-                .append("`victims`=VALUES(`victims`)");
+                .append("`escapeduel`=VALUES(`escapeduel`), `points`=VALUES(`points`)");
         try {
             st = conn.prepareStatement(query.toString());
             st.setString(1, uuid.toString());
@@ -228,7 +268,6 @@ public class User {
             st.setInt(5, winDuel);
             st.setInt(6, escapeDuel);
             st.setInt(7, points);
-            st.setString(8, victimsToString());
             st.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -236,20 +275,6 @@ public class User {
         PvPCage.getMySQL().closeResources(null, st);
     }
 
-    /*
-     private String name;
-     private UUID uuid;
-     private int winDuel;
-     private int loseDuel;
-     private int escapeDuel;
-     private int points;
-     private long lastSave;
-     private String team;
-     private long lastSeen;// to check if somethink....
-     private List<UUID> victims = new ArrayList<>();
-     private Player player;
-     private List<Item> selectedItem = new ArrayList<>();
-     */
     public void saveToFile() {
         File f = new File(FileManager.getUserData(), uuid + ".yml");
         if (!f.exists()) {
