@@ -19,8 +19,6 @@ public class UserManager {
 
     public static List<User> users = new ArrayList<>();
 
-
-
     public static void addUser(User u) {
         users.add(u);
     }
@@ -82,7 +80,11 @@ public class UserManager {
             yml.set("Points", u.getPoints());
             yml.set("Team", u.getTeam());
             yml.set("LastSeen", u.getLastSeen());
-            yml.set("Victims", u.getVictims());
+            List<String> u1 = new ArrayList<>();
+            for (User user : u.getVictims()) {
+                u1.add(user.getUuid().toString());
+            }
+            yml.set("Victims", u1);
             saved++;
         }
         Log.INFO.print("&2Zapisano: &6&l" + saved + "&r&2 Graczy");
@@ -100,8 +102,14 @@ public class UserManager {
             u.setEscapeDuel(yml.getInt("EscapeDuel"));
             u.setPoints(yml.getInt("Points"));
             u.setLastSeen(yml.getLong("LastSeen"));
-            u.setTeam(yml.getString("team"));
-            u.setVictims(yml.getStringList("Victims"));
+            u.setTeam(TeamManager.getTeam(yml.getString("team")));
+            List<User> users = new ArrayList<>();
+            for (String s : yml.getStringList("Victims")) {
+                User user = new User(UUID.fromString(s));
+                user.loadFromFile();
+                users.add(user);
+            }
+            u.setVictims(users);
             load++;
         }
         Log.INFO.print("&2Wczytano: &6&l" + load + "&r&2 Graczy");

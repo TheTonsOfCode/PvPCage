@@ -18,7 +18,7 @@ public class PlayerJoinListener implements Listener {
         user.loadFromMySQL();
         user.setPlayer(e.getPlayer());
         user.setName(e.getPlayer().getName());
-        Team team = TeamManager.getTeam(user.getTeam());
+        Team team = user.getTeam();
         if (team != null) {
             if (!team.containsMember(user)) {
                 team.addMember(user);

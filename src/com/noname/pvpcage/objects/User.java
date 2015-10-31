@@ -4,6 +4,7 @@ import com.noname.pvpcage.PvPCage;
 import com.noname.pvpcage.Test.Item;
 import com.noname.pvpcage.Test.ItemManager;
 import com.noname.pvpcage.managers.FileManager;
+import com.noname.pvpcage.managers.TeamManager;
 import com.noname.pvpcage.utilities.data.Table;
 import java.io.File;
 import java.io.IOException;
@@ -31,7 +32,7 @@ public class User {
     private int escapeDuel;
     private int points;
     private long lastSave;
-    private String team;
+    private Team team;
     private long lastSeen;// to check if somethink....
     private List<User> victims = new ArrayList<>();
     private Player player;
@@ -86,11 +87,11 @@ public class User {
         this.player = player;
     }
 
-    public String getTeam() {
+    public Team getTeam() {
         return team;
     }
 
-    public void setTeam(String team) {
+    public void setTeam(Team team) {
         this.team = team;
     }
 
@@ -182,7 +183,7 @@ public class User {
             e.printStackTrace();
         }
         PvPCage.getMySQL().closeResources(rs, st);
-       
+
     }
 
     private void saveVictims() {
@@ -230,7 +231,7 @@ public class User {
             rs = st.executeQuery();
             if (rs.next()) {
                 name = rs.getString("name");
-                team = rs.getString("team");
+                team = TeamManager.getTeam(rs.getString("team"));
                 loseDuel = rs.getInt("loseduel");
                 winDuel = rs.getInt("winduel");
                 escapeDuel = rs.getInt("escapeduel");
@@ -263,7 +264,7 @@ public class User {
             st = conn.prepareStatement(query.toString());
             st.setString(1, uuid.toString());
             st.setString(2, name);
-            st.setString(3, team);
+            st.setString(3, team.getTag());
             st.setInt(4, loseDuel);
             st.setInt(5, winDuel);
             st.setInt(6, escapeDuel);
@@ -292,8 +293,12 @@ public class User {
         yml.set("EscapeDuel", escapeDuel);
         yml.set("Points", points);
         yml.set("LastSeen", lastSeen);
-        yml.set("Team", team);
-        yml.set("Victims", victims);
+        yml.set("Team", team.getTag());
+        List<String> u = new ArrayList<>();
+        for (User user : victims) {
+            u.add(user.getUuid().toString());
+        }
+        yml.set("Victims", u);
         try {
             yml.save(f);
         } catch (IOException ex) {
@@ -314,8 +319,12 @@ public class User {
         escapeDuel = yml.getInt("EscapeDuel");
         points = yml.getInt("Points");
         lastSeen = yml.getLong("LastSeen");
-        team = yml.getString("team");
-        victims = yml.getStringList("Victims");
+        team = TeamManager.getTeam(yml.getString("team"));
+        for (String uuid : yml.getStringList("Victims")) {
+            User u = new User(UUID.fromString(uuid));
+            u.loadFromFile();
+            victims.add(u);
+        }
     }
 
 }
