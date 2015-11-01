@@ -1,7 +1,7 @@
-CREATE TABLE IF NOT EXISTS `VictimsDataPvPCage` (
+CREATE TABLE IF NOT EXISTS `MembersDataPvPCage` (
     `id` INT(6) NOT NULL AUTO_INCREMENT,
-    `killer_uuid` VARCHAR(36) NOT NULL,
-    `victim_uuid` VARCHAR(36) NOT NULL,
+    `tag` VARCHAR(6) NOT NULL,
+    `uuid` VARCHAR(36) NOT NULL,
     PRIMARY KEY (`id`),
-    KEY (`killer_uuid`, `victim_uuid`)
+    KEY (`tag`, `uuid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
