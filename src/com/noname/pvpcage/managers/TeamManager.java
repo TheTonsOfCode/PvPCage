@@ -57,41 +57,14 @@ public class TeamManager {
         return null;
     }
 
-    public static void loadTeamsFromFile() {
+    public static void loadTeamsFromMySQL() {
         int load = 0;
-        for (File f : FileManager.getPartyData().listFiles()) {
-            FileConfiguration yml = YamlConfiguration.loadConfiguration(f);
-            Team t = new Team();
-            t.setTag(yml.getString("Tag"));
-            t.setLeader(UserManager.getUser(UUID.fromString(yml.getString("Leader.Uuid"))));
-            t.setMod(UserManager.getUser(UUID.fromString(yml.getString("Mod.Uuid"))));
-            t.setName(yml.getString("Name"));
-            load++;
-        }
         Log.INFO.print("&2Zaladowano: &6&l" + load + "&r&2 Teamow");
     }
-    
-    public static void saveTeamtoFile(){
+
+    public static void saveTeamtoMySQL() {
         int saved = 0;
-        for(Team t : teams){
-            File f = new File(FileManager.getPartyData(),t.getTag()+".yml");
-            if(!f.exists()){
-                try {
-                    f.createNewFile();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            }
-            FileConfiguration yml = YamlConfiguration.loadConfiguration(f);
-            yml.set("Name", t.getMod());
-            yml.set("Tag",t.getTag());
-            yml.set("Leader",t.getLeader());
-            yml.set("Mod",t.getMod());
-            yml.set("Members",t.getMembers());
-            saved++;
-        }
         Log.INFO.print("&2Zapisano: &6&l" + saved + "&r&2 Teamow");
     }
-    
 
 }
