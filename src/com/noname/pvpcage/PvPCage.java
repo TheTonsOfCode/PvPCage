@@ -35,7 +35,7 @@ public class PvPCage extends JavaPlugin {
         new PIBukkitListeners(this).instanceAllAt("com.noname.pvpcage.listeners");
         System.out.println(Table.USERS.loadCreateQuery());
     }
-//superrr fajny comit
+//superrr fajny comitd dasdasd asd asdasdasdfas
     public void onDisable() {
         effectManager.dispose();
 //        HandlerList.unregisterAll((Listener) this);
