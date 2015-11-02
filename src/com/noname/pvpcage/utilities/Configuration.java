@@ -20,7 +20,7 @@ public class Configuration {
     public static int PARTY_TAG_LENTH;
     public static int PARTY_NAME_LENTH;
     public static int PARTY_MAX_MEMBERS;
-
+    
     public static int LOGGER_LEVEL;
 
     public static String HOST;
@@ -39,6 +39,10 @@ public class Configuration {
         USER = config.getString("MySQL.User");
         PORT = config.getInt("MySQL.Port");
 
+        PARTY_MAX_MEMBERS = partyConfig.getInt("Party_Max_Members");
+        PARTY_NAME_LENTH = partyConfig.getInt("Party_Name_Lenth");
+        PARTY_TAG_LENTH = partyConfig.getInt("Party_Tag_Lenth");
+        
         CAGE_WALL_MATERIAL = Material.getMaterial(cageConfig.getString("WalledCage.Wall_Material"));
         CAGE_FLOOR_MATERIAL = Material.getMaterial(cageConfig.getString("WalledCage.Floor_Material"));
         PvPCage.getInstance().saveConfig();

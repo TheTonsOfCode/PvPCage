@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS `PartyDataPvPCage` (
     `id` INT(6) NOT NULL AUTO_INCREMENT,
-    `tag` VARCHAR(6) NOT NULL UNIQUE,
-    `name` VARCHAR(16) NOT NULL UNIQUE,
+    `tag` VARCHAR(10) NOT NULL UNIQUE,
+    `name` VARCHAR(36) NOT NULL UNIQUE,
     `leader` VARCHAR(36),
     `mod` VARCHAR(36),
     `invited` VARCHAR(100),

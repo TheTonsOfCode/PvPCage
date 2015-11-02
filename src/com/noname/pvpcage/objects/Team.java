@@ -1,5 +1,6 @@
 package com.noname.pvpcage.objects;
 
+import com.noname.pvpcage.utilities.Configuration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class Team {
     private User mod;
     private List<User> invited = new ArrayList<>();
     public Team() {
-        MAX_SIZE = 5;
+        MAX_SIZE = Configuration.PARTY_MAX_MEMBERS;
         tag = "";
         name = "";
         leader = null;
