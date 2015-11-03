@@ -7,6 +7,7 @@ import com.noname.pvpcage.objects.SubCommand;
 import com.noname.pvpcage.objects.Team;
 import com.noname.pvpcage.objects.User;
 import com.noname.pvpcage.utilities.Configuration;
+import com.noname.pvpcage.utilities.Msg;
 
 public class PartyCmd extends Command {
 
@@ -18,8 +19,8 @@ public class PartyCmd extends Command {
             @Override
             protected void execute() {
                 User user = UserManager.getUser(player.getUniqueId());
-                if (len != 2) {// /party create {tag} {name}
-                    correct();
+                Msg.send(player, len);
+                if (len != 3) {// /party create {tag} {name}
                     return;
                 }
                 if (user.getTeam() != null) {
@@ -43,7 +44,7 @@ public class PartyCmd extends Command {
                 user.setTeam(team);
                 team.setTag(args[0]);
                 team.setName(args[1]);
-
+                
                 send("&6Zalozono Party o nazwie &2" + args[1] + " &6oraz tagu: &7[&2" + args[0] + "&7]");
                 //team.save()''
             }
