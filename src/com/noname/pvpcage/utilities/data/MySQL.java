@@ -1,6 +1,7 @@
 package com.noname.pvpcage.utilities.data;
 
 import com.noname.pvpcage.utilities.Configuration;
+import com.noname.pvpcage.utilities.Msg;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,16 +15,18 @@ public class MySQL {
     public MySQL() {
         try {
             openConnection();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            Table.USERS.createTable();
+            Msg.console("polaczono z baza danych");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    public static void createTables(){
+        Table.USERS.createTable();
+        Table.DEATHS.createTable();
+        Table.TEAMS.createTable();
+        Table.TEAM_MEMBERS.createTable();
+    }
     public Connection openConnection() throws Exception {
         Class.forName("com.mysql.jdbc.Driver");
         Connection conn = DriverManager.getConnection("jdbc:mysql://"
@@ -46,8 +49,6 @@ public class MySQL {
             }
         }
     }
-
-
 
     public void remove(String name) {
         if (!hasConnection()) {

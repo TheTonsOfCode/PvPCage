@@ -13,12 +13,13 @@ public class PartyCmd extends Command {
     public PartyCmd() {
         super("party", "Komenda glowna do party", "");
         setMins(1, 4, "<subcommand>");
+
         addSubCommand(new SubCommand("create", "tworzy party", "c") {
             @Override
             protected void execute() {
                 User user = UserManager.getUser(player.getUniqueId());
                 if (len != 2) {// /party create {tag} {name}
-                    send(usageMessage);
+                    correct();
                     return;
                 }
                 if (user.getTeam() != null) {
@@ -42,7 +43,7 @@ public class PartyCmd extends Command {
                 user.setTeam(team);
                 team.setTag(args[0]);
                 team.setName(args[1]);
-                
+
                 send("&6Zalozono Party o nazwie &2" + args[1] + " &6oraz tagu: &7[&2" + args[0] + "&7]");
                 //team.save()''
             }

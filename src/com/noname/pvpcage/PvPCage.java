@@ -30,12 +30,13 @@ public class PvPCage extends JavaPlugin {
         saveDefaultConfig();
         Configuration.loadConfiguration();
         sql = new MySQL();
-
+        MySQL.createTables();
         new PICommand(this).instanceAllAt("com.noname.pvpcage.commands");
         new PIBukkitListeners(this).instanceAllAt("com.noname.pvpcage.listeners");
         System.out.println(Table.USERS.loadCreateQuery());
     }
 //superrr fajny comitd dasdasd asd asdasdasdfas
+
     public void onDisable() {
         effectManager.dispose();
 //        HandlerList.unregisterAll((Listener) this);
