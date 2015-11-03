@@ -17,11 +17,15 @@ public class MySQL {
             openConnection();
             Msg.console("polaczono z baza danych");
         } catch (Exception e) {
-            e.printStackTrace();
+            Msg.console("&4NIE POLACZONO Z MYSQL");
         }
     }
 
-    public static void createTables(){
+    public void createTables(){
+        if(getConnection() == null){
+            Msg.console("&4NIE MOZNA STWORZYC TABEL PONIEWAZ NIE POLACZONO Z MYSQL");
+            return;
+        }
         for(Table t: Table.values()) {
             t.createTable();
         }
