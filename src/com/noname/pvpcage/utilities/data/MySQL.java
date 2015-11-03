@@ -22,10 +22,9 @@ public class MySQL {
     }
 
     public static void createTables(){
-        Table.USERS.createTable();
-        Table.DEATHS.createTable();
-        Table.TEAMS.createTable();
-        Table.TEAM_MEMBERS.createTable();
+        for(Table t: Table.values()) {
+            t.createTable();
+        }
     }
     public Connection openConnection() throws Exception {
         Class.forName("com.mysql.jdbc.Driver");

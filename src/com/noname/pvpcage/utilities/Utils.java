@@ -41,6 +41,7 @@ public class Utils {
     }
     
     public static String loadQuery(String queryName) {
+        queryName += ".sql";
         String query = "";
         try {
             String line;

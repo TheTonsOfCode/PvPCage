@@ -40,6 +40,6 @@ public enum Table {
     }
 
     public String loadCreateQuery() {
-        return Utils.loadQuery(createQueryName + ".sql");
+        return Utils.loadQuery(createQueryName);
     }
 }

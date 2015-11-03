@@ -13,6 +13,10 @@ import org.bukkit.event.player.PlayerInteractEvent;
 public class CageItemListener implements Listener {
 
     public static Location LEFT, RIGHT;
+    
+    public static boolean areSetted() {
+        return LEFT != null && RIGHT != null;
+    }
 
     @EventHandler
     public void item(PlayerInteractEvent e) {
@@ -70,6 +74,7 @@ public class CageItemListener implements Listener {
             String s = "&7(&8X:&e" + loc.getBlockX() + "&7,&8Y:&e" + loc.getBlockY() + "&7,&8Z:&e" + loc.getBlockZ() + "&7)";
             
             Msg.send(p, "&aUstawiono &b" + cl + " &alokacje klatki! " + s + (f == 0 ? "" : " &7[&e" + f + "&7]"));
+            e.setCancelled(true);
         }
     }
 }
