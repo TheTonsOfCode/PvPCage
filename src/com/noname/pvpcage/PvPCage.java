@@ -1,5 +1,6 @@
 package com.noname.pvpcage;
 
+import com.noname.pvpcage.hooks.WorldEditHook;
 import com.noname.pvpcage.managers.FileManager;
 import com.noname.pvpcage.utilities.Configuration;
 import com.noname.pvpcage.utilities.MessageManager;
@@ -33,7 +34,9 @@ public class PvPCage extends JavaPlugin {
         sql.createTables();
         new PICommand(this).instanceAllAt("com.noname.pvpcage.commands");
         new PIBukkitListeners(this).instanceAllAt("com.noname.pvpcage.listeners");
-        System.out.println(Table.USERS.loadCreateQuery());
+        
+        new WorldEditHook().onHookConnect(getServer().getPluginManager());
+//        System.out.println(Table.USERS.loadCreateQuery());
     }
 
     public void onDisable() {

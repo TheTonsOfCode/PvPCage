@@ -7,6 +7,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MySQL {
 
@@ -47,7 +49,7 @@ public class MySQL {
             try {
                 return openConnection();
             } catch (Exception e) {
-                e.printStackTrace();
+                Msg.console("&4Blad z otwarciem polaczenia");
                 return null;
             }//hehe
         }
@@ -74,11 +76,14 @@ public class MySQL {
 
     public boolean hasConnection() {
         try {
-            return connection != null || connection.isValid(1);
-
+            if(connection == null) {
+                return false;
+            }
+            
+            return connection.isValid(1);
         } catch (SQLException ex) {
-            ex.printStackTrace();
         }
+        
         return false;
     }
 

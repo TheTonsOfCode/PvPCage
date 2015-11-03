@@ -16,7 +16,7 @@ public class WorldEditHook extends Hook {
     }
 
     @Override
-    protected boolean onHookConnect(PluginManager pluginManager) {
+    public boolean onHookConnect(PluginManager pluginManager) {
         hook = ((WorldEditPlugin) pluginManager.getPlugin(getHookName()));
         if (hook == null) {
             connectMessage(false);

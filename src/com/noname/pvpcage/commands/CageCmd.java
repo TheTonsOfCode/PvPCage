@@ -1,5 +1,6 @@
 package com.noname.pvpcage.commands;
 
+import com.noname.pvpcage.PvPCage;
 import com.noname.pvpcage.builder.CageBuilder;
 import com.noname.pvpcage.builder.cage.WalledCage;
 import com.noname.pvpcage.listeners.CageItemListener;
@@ -66,7 +67,7 @@ public class CageCmd extends Command {
                         return;
                     }
                     try {
-                        new TerrainManager(player).saveTerrain(new File("Accb"), CageItemListener.LEFT, CageItemListener.RIGHT);
+                        new TerrainManager(player).saveTerrain(new File(PvPCage.getInstance().getDataFolder(), "backup1"), CageItemListener.LEFT, CageItemListener.RIGHT);
                     } catch (FilenameException ex) {
                         Logger.getLogger(CageCmd.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (DataException ex) {

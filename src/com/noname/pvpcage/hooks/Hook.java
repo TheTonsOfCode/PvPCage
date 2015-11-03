@@ -30,7 +30,7 @@ public abstract class Hook {
         isHooked = onHookConnect(pluginManager);
     }
     
-    protected abstract boolean onHookConnect(PluginManager pluginManager);
+    public abstract boolean onHookConnect(PluginManager pluginManager);
     
     protected void connectMessage(boolean connected) {
         Log.DEBUG.print("Plugin: " + getHookName() + " " + (connected ? "" : "not ") + "hooked.");
