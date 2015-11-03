@@ -15,21 +15,23 @@ public class MySQL {
     public MySQL() {
         try {
             openConnection();
+            
             Msg.console("polaczono z baza danych");
         } catch (Exception e) {
             Msg.console("&4NIE POLACZONO Z MYSQL");
         }
     }
 
-    public void createTables(){
-        if(getConnection() == null){
+    public void createTables() {
+        if (getConnection() == null) {
             Msg.console("&4NIE MOZNA STWORZYC TABEL PONIEWAZ NIE POLACZONO Z MYSQL");
             return;
         }
-        for(Table t: Table.values()) {
+        for (Table t : Table.values()) {
             t.createTable();
         }
     }
+
     public Connection openConnection() throws Exception {
         Class.forName("com.mysql.jdbc.Driver");
         Connection conn = DriverManager.getConnection("jdbc:mysql://"
