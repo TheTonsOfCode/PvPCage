@@ -18,8 +18,8 @@ public class CageCuboid {
         setRegions(loc, size);
     }
     
-    public CageCuboid(Location loc, Location loc2) {
-        setRegions(loc, loc2);       
+    public CageCuboid(Location loc, Location loc2, Location center) {
+        setRegions(loc, loc2, center);       
     }
     
     private void init() {
@@ -27,16 +27,20 @@ public class CageCuboid {
         height = upper.getBlockZ() - lower.getBlockZ();
     }
     
-    public void setRegions(Location loc, int size) {  
-        lower = loc.clone().add(-size, 0, -size);
-        upper = loc.clone().add(size, 0, size);
+    public void setRegions(Location center, int size) {  
+        lower = center.clone().add(-size, 0, -size);
+        upper = center.clone().add(size, 0, size);
         init();
     }
     
-    public void setRegions(Location loc, Location loc2) {
+    public void setRegions(Location loc, Location loc2, Location center) {
         lower = new Location(loc.getWorld(), Math.min(loc.getBlockX(), loc2.getBlockX()), 0, Math.min(loc.getBlockZ(), loc2.getBlockZ()));
         upper = new Location(loc.getWorld(), Math.max(loc.getBlockX(), loc2.getBlockX()), 0, Math.max(loc.getBlockZ(), loc2.getBlockZ()));        
         init();
+        int x = center.getBlockX();
+        int z = center.getBlockZ();
+        lower = center.clone().add(x -(width>>1), 0, z -(height>>1));
+        upper = center.clone().add(x +(width>>1), 0, z +(height>>1));
     }
     
     public boolean isIn(CageCuboid cc) {

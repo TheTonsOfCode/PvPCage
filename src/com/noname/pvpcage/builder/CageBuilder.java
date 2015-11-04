@@ -1,10 +1,25 @@
 package com.noname.pvpcage.builder;
 
+import com.noname.pvpcage.hooks.WorldEditHook;
 import com.noname.pvpcage.utilities.generators.SchemeRecipment;
 import com.noname.pvpcage.utilities.generators.SchemeStruct;
+import com.sk89q.worldedit.CuboidClipboard;
+import com.sk89q.worldedit.EditSession;
+import com.sk89q.worldedit.EmptyClipboardException;
+import com.sk89q.worldedit.FilenameException;
+import com.sk89q.worldedit.LocalPlayer;
+import com.sk89q.worldedit.LocalSession;
+import com.sk89q.worldedit.MaxChangedBlocksException;
+import com.sk89q.worldedit.Vector;
+import com.sk89q.worldedit.WorldEdit;
+import com.sk89q.worldedit.bukkit.BukkitWorld;
+import com.sk89q.worldedit.data.DataException;
+import com.sk89q.worldedit.schematic.SchematicFormat;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.minecraft.util.org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
@@ -35,23 +50,23 @@ public class CageBuilder {
         newWorld.setWaterAnimalSpawnLimit(0);
         newWorld.setTicksPerAnimalSpawns(0);
         newWorld.setTime(0);
-        
+
         createSpawnPlatform();
 
         return newWorld;
     }
-    
+
     public static boolean deleteCageWorld() {
         Location mainWorld = Bukkit.getWorlds().get(0).getSpawnLocation();
-        
+
         World cgWorld = getCageWorld();
-        for(Player p: Bukkit.getOnlinePlayers()){
-            if(p.getWorld() == cgWorld){
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            if (p.getWorld() == cgWorld) {
                 p.teleport(mainWorld);
             }
         }
 
-        try { 
+        try {
             Bukkit.getServer().unloadWorld(CAGE_WORLD, true);
             File f = new File(new File(".").getAbsolutePath() + File.separator + CAGE_WORLD);
             FileUtils.deleteDirectory(f);
@@ -126,38 +141,28 @@ public class CageBuilder {
         }
         player.teleport(getCageWorld().getSpawnLocation().add(0.5, posY, 0.5));
     }
-    
+
     private static ArrayList<Cage> onlineCages = new ArrayList<>();
     private static ArrayList<Point> possibleCagesLocs;
+
     static {
-        onlineCages.add(new Cage(CageType.WALLS) {          
-            @Override
-            public void calculateCuboid(Location loc) {
-                cageCuboid = new CageCuboid(20);
-            }         
-            @Override
-            public void onCreateBattle(Location loc) {
-            }           
-            @Override
-            public void onRemoveBattle() {
-            }
-        });
-        
+        onlineCages.add(new Cage());
+
         genPossibleCagesLocs(30);
     }
-    
+
     private static void genPossibleCagesLocs(int size) {
         possibleCagesLocs = new ArrayList();
         Location sp = getCageWorld().getSpawnLocation();
-        
+
         double o = 0D;
         double locationToSpawn = 0D, slice = 0D;
         int i = 0;
-        
+
         int MAX = 8;
-        
-        for (int j = 0; j < size ;j++) {
-            if(i == 0) {
+
+        for (int j = 0; j < size; j++) {
+            if (i == 0) {
                 o += 50.0;
                 locationToSpawn = Math.sqrt(Math.pow(o, 2.0) + Math.pow(o, 2.0));
                 slice = (2 * 3.14) / ((double) MAX);
@@ -170,53 +175,54 @@ public class CageBuilder {
             );
 
             i++;
-            if(i == MAX) {
+            if (i == MAX) {
                 i = 0;
                 MAX *= 2;
             }
         }
     }
-    
+
     public static final int BUILD_Y = 32;
-    private static class Point { 
+
+    private static class Point {
+
         public double x, z;
-        
-        Point (double x, double z) {
+
+        Point(double x, double z) {
             this.x = x;
             this.z = z;
         }
     }
-    
+
     public static void buildCage(Cage cage) {
-        if(onlineCages.size() == possibleCagesLocs.size()) {
+        if (onlineCages.size() == possibleCagesLocs.size()) {
             genPossibleCagesLocs(possibleCagesLocs.size() + 10);
         }
 
         Location target = null;
-        
-        for(Point p: possibleCagesLocs) {
+
+        for (Point p : possibleCagesLocs) {
             Location l = new Location(getCageWorld(), p.x, BUILD_Y, p.z);
             cage.calculateCuboid(l);
             boolean collide = false;
             CageCuboid cc = cage.getCageCuboid();
-            for(Cage c: onlineCages) {
-                if(c.getCageCuboid().isIn(cc)) {
+            for (Cage c : onlineCages) {
+                if (c.getCageCuboid().isIn(cc)) {
                     collide = true;
                     break;
                 }
             }
-            
-            if(!collide) {
+
+            if (!collide) {
                 target = l;
                 break;
             }
         }
-        
-        if(target != null) {
+
+        if (target != null) {
             cage.onCreateBattle(target);
             onlineCages.add(cage);
-        }
-        else {
+        } else {
             genPossibleCagesLocs(possibleCagesLocs.size() + 20);
             buildCage(cage);
         }

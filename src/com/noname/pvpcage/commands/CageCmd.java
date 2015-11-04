@@ -2,17 +2,11 @@ package com.noname.pvpcage.commands;
 
 import com.noname.pvpcage.PvPCage;
 import com.noname.pvpcage.builder.CageBuilder;
-import com.noname.pvpcage.builder.cage.WalledCage;
+import com.noname.pvpcage.builder.WESchematic;
 import com.noname.pvpcage.listeners.CageItemListener;
 import com.noname.pvpcage.objects.Command;
 import com.noname.pvpcage.objects.SubCommand;
-import com.sk89q.worldedit.FilenameException;
-import com.sk89q.worldedit.data.DataException;
 import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import me.desht.dhutils.TerrainManager;
 
 public class CageCmd extends Command {
 
@@ -22,7 +16,7 @@ public class CageCmd extends Command {
         addSubCommand(new SubCommand("build", "buduje klatke", "b") {
                 @Override
                 protected void execute() {
-                    new WalledCage().onCreateBattle(player.getLocation());
+//                    new WalledCage().onCreateBattle(player.getLocation());
                     send("&aStworzono klatke!");
                 }  
         });
@@ -53,7 +47,7 @@ public class CageCmd extends Command {
                 @Override
                 protected void execute() {
                     for (int j = 0; j < 32 ;j++) {
-                        CageBuilder.buildCage(new WalledCage());
+//                        CageBuilder.buildCage(new WalledCage());
                     }
                     send("&aStworzono 32 klatki!");
                 }  
@@ -66,16 +60,16 @@ public class CageCmd extends Command {
                         send("&ePozycje nie sa ustawione!");
                         return;
                     }
-                    try {
-                        new TerrainManager(player).saveTerrain(new File(PvPCage.getInstance().getDataFolder(), "backup1"), CageItemListener.LEFT, CageItemListener.RIGHT);
-                    } catch (FilenameException ex) {
-                        Logger.getLogger(CageCmd.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (DataException ex) {
-                        Logger.getLogger(CageCmd.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (IOException ex) {
-                        Logger.getLogger(CageCmd.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    
+                    new WESchematic(player).saveSchematic("backup1", CageItemListener.LEFT, CageItemListener.RIGHT);
                 }  
+        });
+        
+        addSubCommand(new SubCommand("z", "zapisuje", "") {
+                @Override
+                protected void execute() {
+                    new WESchematic(player).loadSchematic("backup1", player.getLocation());
+                }
         });
     }
 
