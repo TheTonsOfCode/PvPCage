@@ -1,25 +1,11 @@
 package com.noname.pvpcage.builder;
 
-import com.noname.pvpcage.hooks.WorldEditHook;
+import com.noname.pvpcage.utilities.Utils;
 import com.noname.pvpcage.utilities.generators.SchemeRecipment;
 import com.noname.pvpcage.utilities.generators.SchemeStruct;
-import com.sk89q.worldedit.CuboidClipboard;
-import com.sk89q.worldedit.EditSession;
-import com.sk89q.worldedit.EmptyClipboardException;
-import com.sk89q.worldedit.FilenameException;
-import com.sk89q.worldedit.LocalPlayer;
-import com.sk89q.worldedit.LocalSession;
-import com.sk89q.worldedit.MaxChangedBlocksException;
-import com.sk89q.worldedit.Vector;
-import com.sk89q.worldedit.WorldEdit;
-import com.sk89q.worldedit.bukkit.BukkitWorld;
-import com.sk89q.worldedit.data.DataException;
-import com.sk89q.worldedit.schematic.SchematicFormat;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import net.minecraft.util.org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
@@ -221,10 +207,54 @@ public class CageBuilder {
 
         if (target != null) {
             cage.onCreateBattle(target);
+            CageCuboid cc = cage.getCageCuboid();
             onlineCages.add(cage);
         } else {
             genPossibleCagesLocs(possibleCagesLocs.size() + 20);
             buildCage(cage);
         }
     }
+    
+    public static void bb(Location target) {
+        Cage cage = new Cage(getRandomSchematicName());
+        cage.calculateCuboid(target);
+        cage.onCreateBattle(target);
+        aa(target, Material.DIAMOND_BLOCK);
+        CageCuboid cc = cage.getCageCuboid();
+        System.out.println(cc.height + "  =  " + cc.width);
+        aa(cc.getLower(), Material.IRON_BLOCK);
+        aa(cc.getUpper(), Material.GOLD_BLOCK);
+    }
+    
+    private static void aa(Location loc, Material m) {
+        for(int y = 0; y < 50 ;y++) {
+            Location l = loc.clone();
+            l.setY(y);
+            l.getBlock().setType(m);
+        }
+    }
+    
+    private static ArrayList<String> schemsNames = new ArrayList<>();
+    
+    public static void refreshSchematicsNames() {
+        schemsNames = WESchematic.getSchematicsNames();
+    }
+    
+    public static boolean schemExist(String schemName) {
+        for(String s: schemsNames) {
+            if(s.equalsIgnoreCase(schemName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public static void buildRandomSchematicCage() {
+        buildCage(new Cage(getRandomSchematicName()));
+    }
+    
+    private static String getRandomSchematicName() {
+        return schemsNames.get(Utils.RANDOM.nextInt(schemsNames.size()));
+    }
+    
 }

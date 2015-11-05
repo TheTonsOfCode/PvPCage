@@ -36,6 +36,8 @@ public abstract class PackageInstancer {
         String path = pkg.replaceAll("\\.", "/");
 
         String jarName = plugin.getDataFolder().getAbsolutePath() + ".jar";
+        //final File jarFile = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
+
 
         try {
             JarInputStream jarFile = new JarInputStream(new FileInputStream(jarName));

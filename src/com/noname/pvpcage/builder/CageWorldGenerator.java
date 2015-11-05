@@ -25,7 +25,7 @@ public class CageWorldGenerator extends ChunkGenerator
                         if(x == 0 || z == 0)
                             setBlock(result, x, y, z, (byte)42);
                         else if(x == z || (z == 16 - x && x == 16 - z))
-                            setBlock(result, x, y, z, (byte)172);
+                            setBlock(result, x, y, z, (byte)49);
                         else
                             setBlock(result, x, y, z, (byte)7);
                     }

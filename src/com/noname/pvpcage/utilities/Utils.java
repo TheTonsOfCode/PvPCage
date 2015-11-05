@@ -6,12 +6,17 @@ import de.slikey.effectlib.util.ParticleEffect;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 
 public class Utils {
+
+    public static final Random RANDOM = new Random();
 
     public static void createParticleText(String chars, Location loc) {
         TextEffect text = new TextEffect(PvPCage.getEffectManager());
@@ -22,9 +27,9 @@ public class Utils {
         text.autoOrient = true;
         text.particle = de.slikey.effectlib.util.ParticleEffect.FLAME;
         text.setLocation(loc.add(5, 2, 0));
-        text.start();       
+        text.start();
     }
-    
+
     public static String fixColor(String string) {
         if (string == null) {
             return "";
@@ -39,13 +44,37 @@ public class Utils {
         }
         return colors;
     }
-    
+
+    @Deprecated
     public static String loadQuery(String queryName) {
         queryName += ".sql";
         String query = "";
         try {
             String line;
             InputStream is = new Utils().getClass().getClassLoader().getResourceAsStream(queryName);
+            BufferedReader input = new BufferedReader(new InputStreamReader(is));
+            while ((line = input.readLine()) != null) {
+                query += line;
+            }
+            input.close();
+            return query;
+        } catch (Exception err) {
+            err.printStackTrace();
+        }
+        return null;
+    }
+
+    public static String loadQueryNew(String queryName) {
+        queryName = "sql/" + queryName + ".sql";
+        String query = "";
+        try {
+            String line;
+            URL u = new Utils().getClass().getClassLoader().getResource(queryName);
+
+            URLConnection uc = u.openConnection();
+            uc.setUseCaches(false);
+            InputStream is = uc.getInputStream();
+
             BufferedReader input = new BufferedReader(new InputStreamReader(is));
             while ((line = input.readLine()) != null) {
                 query += line;

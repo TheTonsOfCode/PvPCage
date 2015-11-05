@@ -17,6 +17,7 @@ public class CageCmd extends Command {
                 @Override
                 protected void execute() {
 //                    new WalledCage().onCreateBattle(player.getLocation());
+                    CageBuilder.bb(player.getLocation());
                     send("&aStworzono klatke!");
                 }  
         });
@@ -47,6 +48,7 @@ public class CageCmd extends Command {
                 @Override
                 protected void execute() {
                     for (int j = 0; j < 32 ;j++) {
+                        CageBuilder.buildRandomSchematicCage();
 //                        CageBuilder.buildCage(new WalledCage());
                     }
                     send("&aStworzono 32 klatki!");
@@ -56,19 +58,40 @@ public class CageCmd extends Command {
         addSubCommand(new SubCommand("schem", "zapisuje teren", "sch") {
                 @Override
                 protected void execute() {
+                    if(len != 2) {
+                        correct();
+                        return;
+                    }
+                    
+                    if(CageBuilder.schemExist(args[1])) {
+                        send("&eIstnieje juz taki schemat!");
+                        return;
+                    }
+                    
                     if(!CageItemListener.areSetted()) {
                         send("&ePozycje nie sa ustawione!");
                         return;
                     }
                     
-                    new WESchematic(player).saveSchematic("backup1", CageItemListener.LEFT, CageItemListener.RIGHT);
+                    new WESchematic(player).saveSchematic(args[1], CageItemListener.LEFT, CageItemListener.RIGHT);
+                    CageBuilder.refreshSchematicsNames();
                 }  
         });
         
         addSubCommand(new SubCommand("z", "zapisuje", "") {
                 @Override
                 protected void execute() {
-                    new WESchematic(player).loadSchematic("backup1", player.getLocation());
+                    if(len != 2) {
+                        correct();
+                        return;
+                    }
+                    
+                    if(!CageBuilder.schemExist(args[1])) {
+                        send("&eNie rozpoznano schematu!");
+                        return;
+                    }
+                    
+                    new WESchematic(player).loadSchematic(args[1], player.getLocation());
                 }
         });
     }

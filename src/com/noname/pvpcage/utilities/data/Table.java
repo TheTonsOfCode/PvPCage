@@ -8,10 +8,10 @@ import java.sql.SQLException;
 
 public enum Table {
 
-    DEATHS("createDeaths"),
-    TEAMS("createTeams"),
-    USERS("createUsers"),
-    TEAM_MEMBERS("createMembers");
+    DEATHS("Deaths"),
+    TEAMS("Teams"),
+    USERS("Users"),
+    TEAM_MEMBERS("Members");
 
     private String createQueryName;
 
@@ -40,6 +40,6 @@ public enum Table {
     }
 
     public String loadCreateQuery() {
-        return Utils.loadQuery(createQueryName);
+        return Utils.loadQueryNew("createTable" + createQueryName);
     }
 }

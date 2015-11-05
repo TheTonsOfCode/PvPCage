@@ -1,11 +1,11 @@
 package com.noname.pvpcage;
 
+import com.noname.pvpcage.builder.CageBuilder;
 import com.noname.pvpcage.hooks.WorldEditHook;
 import com.noname.pvpcage.managers.FileManager;
 import com.noname.pvpcage.utilities.Configuration;
 import com.noname.pvpcage.utilities.MessageManager;
 import com.noname.pvpcage.utilities.data.MySQL;
-import com.noname.pvpcage.utilities.data.Table;
 import com.noname.pvpcage.utilities.instance.PIBukkitListeners;
 import com.noname.pvpcage.utilities.instance.PICommand;
 import de.slikey.effectlib.EffectManager;
@@ -34,14 +34,14 @@ public class PvPCage extends JavaPlugin {
         sql.createTables();
         new PICommand(this).instanceAllAt("com.noname.pvpcage.commands");
         new PIBukkitListeners(this).instanceAllAt("com.noname.pvpcage.listeners");
-        
+
         new WorldEditHook().onHookConnect(getServer().getPluginManager());
-//        System.out.println(Table.USERS.loadCreateQuery());
+
+        CageBuilder.refreshSchematicsNames();
     }
 
     public void onDisable() {
         effectManager.dispose();
-//        HandlerList.unregisterAll((Listener) this);
     }
 
     public static MySQL getMySQL() {

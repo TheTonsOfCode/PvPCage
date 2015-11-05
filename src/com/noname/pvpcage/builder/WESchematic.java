@@ -21,19 +21,51 @@ import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.data.DataException;
 import com.sk89q.worldedit.schematic.SchematicFormat;
+import java.util.ArrayList;
 
 public class WESchematic {
-    
+
+    private static final String EXTENSION = "schematic";
+    private static final String SCHEM_FOLDER = PvPCage.getInstance().getDataFolder().getAbsolutePath() + "/schems";
+
+    static {
+        File f = new File(SCHEM_FOLDER);
+        if (!f.exists()) {
+            f.mkdirs();
+        }
+    }
+
     public static class SchematicCorners {
+
         public Location l1, l2;
+
         public SchematicCorners(Location l1, Location l2) {
             this.l1 = l1;
             this.l2 = l2;
         }
     }
 
-    private static final String EXTENSION = "schematic";
-    private static final String SCHEM_FOLDER = PvPCage.getInstance().getDataFolder().getAbsolutePath() + "/schems";
+    public static ArrayList<String> getSchematicsNames() {
+        File folder = new File(SCHEM_FOLDER);
+        File[] listOfFiles = folder.listFiles();
+
+        if (listOfFiles == null || listOfFiles.length == 0) {
+            return null;
+        }
+
+        ArrayList<String> names = new ArrayList<>();
+
+        for (File file : listOfFiles) {
+            if (file.isFile()) {
+                String[] s = file.getName().split("\\.");
+                if (s[1].equals(EXTENSION)) {
+                    names.add(s[0]);
+                }
+            }
+        }
+
+        return names;
+    }
 
     private final WorldEdit we;
     private final LocalSession localSession;
@@ -118,9 +150,9 @@ public class WESchematic {
     public void loadSchematic(String schemName) {
         loadSchematic(schemName, null);
     }
-    
+
     public SchematicCorners getSchematicCorners(String schemName) {
-     File saveFile = new File(SCHEM_FOLDER, schemName);
+        File saveFile = new File(SCHEM_FOLDER, schemName);
         try {
             saveFile = we.getSafeSaveFile(localPlayer,
                     saveFile.getParentFile(), saveFile.getName(),
@@ -139,9 +171,9 @@ public class WESchematic {
         try {
             c = localSession.getClipboard();
         } catch (EmptyClipboardException ex) {
-        }  
+        }
         Location l = new Location(CageBuilder.getCageWorld(), 0, 0, 0);
-        SchematicCorners sc = new SchematicCorners(l, l.clone().add(c.getWidth(), 0, c.getLength()));
+        SchematicCorners sc = new SchematicCorners(l.clone(), l.clone().add(c.getWidth(), 0, c.getLength()));
         editSession.flushQueue();
         return sc;
     }
@@ -172,14 +204,14 @@ public class WESchematic {
 }
 
 /*
-    WESchematic s = new TerrainManager(player);
-    WESchematic s = new TerrainManager(world);
+ WESchematic s = new TerrainManager(player);
+ WESchematic s = new TerrainManager(world);
 
-    File saveFile = new File(plugin.getDataFolder(), "backup1");
+ File saveFile = new File(plugin.getDataFolder(), "backup1");
 
-    s.saveTerrain(saveFile, l1, l2);
+ s.saveTerrain(saveFile, l1, l2);
 
-    s.loadSchematic(saveFile, location);
+ s.loadSchematic(saveFile, location);
 
-    s.loadSchematic(saveFile);
-*/
+ s.loadSchematic(saveFile);
+ */
