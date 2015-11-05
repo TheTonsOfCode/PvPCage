@@ -174,11 +174,11 @@ public class Team {
                 .append("`tag`=VALUES(`tag`), `uuid`=VALUES(`uuid`)");
         try {
             for (User victim : members) {
-                st.addBatch(query.toString());
+                st = conn.prepareStatement(query.toString());
                 st.setString(1, tag);
                 st.setString(2, victim.getUuid().toString());
+                st.executeQuery();
             }
-            st.executeBatch();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -248,5 +248,3 @@ public class Team {
         PvPCage.getInstance().getMySQL().closeResources(rs, st);
     }
 }
-
-

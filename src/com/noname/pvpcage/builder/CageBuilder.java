@@ -214,7 +214,7 @@ public class CageBuilder {
             buildCage(cage);
         }
     }
-    
+
     public static void bb(Location target) {
         Cage cage = new Cage(getRandomSchematicName());
         cage.calculateCuboid(target);
@@ -225,36 +225,39 @@ public class CageBuilder {
         aa(cc.getLower(), Material.IRON_BLOCK);
         aa(cc.getUpper(), Material.GOLD_BLOCK);
     }
-    
+
     private static void aa(Location loc, Material m) {
-        for(int y = 0; y < 50 ;y++) {
+        for (int y = 0; y < 50; y++) {
             Location l = loc.clone();
             l.setY(y);
             l.getBlock().setType(m);
         }
     }
-    
+
     private static ArrayList<String> schemsNames = new ArrayList<>();
-    
+
     public static void refreshSchematicsNames() {
         schemsNames = WESchematic.getSchematicsNames();
     }
-    
+
     public static boolean schemExist(String schemName) {
-        for(String s: schemsNames) {
-            if(s.equalsIgnoreCase(schemName)) {
+        if (schemsNames.isEmpty()) {
+            return false;
+        }
+        for (String s : schemsNames) {
+            if (s.equalsIgnoreCase(schemName)) {
                 return true;
             }
         }
         return false;
     }
-    
+
     public static void buildRandomSchematicCage() {
         buildCage(new Cage(getRandomSchematicName()));
     }
-    
+
     private static String getRandomSchematicName() {
         return schemsNames.get(Utils.RANDOM.nextInt(schemsNames.size()));
     }
-    
+
 }

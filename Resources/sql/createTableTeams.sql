@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS `PartyDataPvPCage` (
     `name` VARCHAR(36) NOT NULL UNIQUE,
     `leader` VARCHAR(36),
     `mod` VARCHAR(36),
-    `invited` VARCHAR(100),
+    `` BIGINT(100),
     PRIMARY KEY (`id`),
     KEY (`tag`, `name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
