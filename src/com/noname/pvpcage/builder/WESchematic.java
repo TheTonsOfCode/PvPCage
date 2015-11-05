@@ -51,7 +51,7 @@ public class WESchematic {
         File[] listOfFiles = folder.listFiles();
 
         if (listOfFiles == null || listOfFiles.length == 0) {
-            return null;
+            return new ArrayList<>();
         }
 
         ArrayList<String> names = new ArrayList<>();
