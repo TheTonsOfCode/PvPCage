@@ -3,11 +3,8 @@ package com.noname.pvpcage.objects;
 import com.noname.pvpcage.PvPCage;
 import com.noname.pvpcage.Test.Item;
 import com.noname.pvpcage.Test.ItemManager;
-import com.noname.pvpcage.managers.FileManager;
 import com.noname.pvpcage.managers.TeamManager;
-import com.noname.pvpcage.utilities.data.Table;
-import java.io.File;
-import java.io.IOException;
+import com.noname.pvpcage.utilities.Msg;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,14 +12,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
-/**
- *
- * @author dekros987
- */
+
 public class User {
 
     private String name;
@@ -33,7 +25,6 @@ public class User {
     private int points;
     private long lastSave;
     private Team team;
-    private long lastSeen;// to check if somethink....
     private List<User> victims = new ArrayList<>();
     private Player player;
     private List<Item> selectedItem = new ArrayList<>();
@@ -43,7 +34,6 @@ public class User {
         name = "";
         loseDuel = 0;
         escapeDuel = 0;
-        lastSave = System.currentTimeMillis();
         points = 0;
         team = null;
         player = null;
@@ -93,14 +83,6 @@ public class User {
 
     public void setTeam(Team team) {
         this.team = team;
-    }
-
-    public long getLastSeen() {
-        return lastSeen;
-    }
-
-    public void setLastSeen(long lastSeen) {
-        this.lastSeen = lastSeen;
     }
 
     public String getName() {
@@ -165,9 +147,11 @@ public class User {
             try {
                 conn = PvPCage.getMySQL().openConnection();
             } catch (Exception e) {
-                e.printStackTrace();
+                Msg.console("&4Nie mozna wczytaj ofiar z powodu braku polaczenia do mysql!");
+                return;
             }
         }
+
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
@@ -192,7 +176,8 @@ public class User {
             try {
                 conn = PvPCage.getMySQL().openConnection();
             } catch (Exception e) {
-                e.printStackTrace();
+                Msg.console("&4Nie mozna zapisac ofiar z powodu braku polaczenia do mysql!");
+                return;
             }
         }
 
@@ -220,7 +205,8 @@ public class User {
             try {
                 conn = PvPCage.getMySQL().openConnection();
             } catch (Exception e) {
-                e.printStackTrace();
+                Msg.console("&4Nie mozna wczytaj gracza z powodu braku polaczenia do mysql!");
+                return;
             }
         }
         PreparedStatement st = null;
@@ -240,6 +226,7 @@ public class User {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        loadVictims();
         PvPCage.getMySQL().closeResources(rs, st);
     }
 
@@ -249,7 +236,8 @@ public class User {
             try {
                 conn = PvPCage.getMySQL().openConnection();
             } catch (Exception e) {
-                e.printStackTrace();
+                Msg.console("&4Nie mozna zapisac gracza z powodu braku polaczenia do mysql!");
+                return;
             }
         }
         PreparedStatement st = null;
@@ -272,6 +260,7 @@ public class User {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        saveVictims();
         PvPCage.getMySQL().closeResources(null, st);
     }
 }
