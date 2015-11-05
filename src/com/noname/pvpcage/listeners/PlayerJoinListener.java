@@ -25,7 +25,7 @@ public class PlayerJoinListener implements Listener {
             }
         }
         UserManager.addUser(user);
-        Log.INFO.print("Stworzony nowy obiekt User dla gracza: " + e.getPlayer().getName());
+        Log.DEBUG.print("Stworzony nowy obiekt User dla gracza: " + e.getPlayer().getName());
     }
 
 }

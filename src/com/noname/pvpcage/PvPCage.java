@@ -3,6 +3,7 @@ package com.noname.pvpcage;
 import com.noname.pvpcage.builder.CageBuilder;
 import com.noname.pvpcage.hooks.WorldEditHook;
 import com.noname.pvpcage.managers.FileManager;
+import com.noname.pvpcage.managers.TeamManager;
 import com.noname.pvpcage.utilities.Configuration;
 import com.noname.pvpcage.utilities.MessageManager;
 import com.noname.pvpcage.utilities.data.MySQL;
@@ -32,6 +33,7 @@ public class PvPCage extends JavaPlugin {
         Configuration.loadConfiguration();
         sql = new MySQL();
         sql.createTables();
+        TeamManager.loadTeamsFromMySQL();
         new PICommand(this).instanceAllAt("com.noname.pvpcage.commands");
         new PIBukkitListeners(this).instanceAllAt("com.noname.pvpcage.listeners");
 

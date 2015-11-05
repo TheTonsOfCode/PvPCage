@@ -42,11 +42,11 @@ public class PartyCmd extends Command {
                 Team team = new Team();
                 team.setLeader(user);
                 user.setTeam(team);
+                user.saveToMySQL();
                 team.setTag(args[0]);
                 team.setName(args[1]);
-                
+                team.saveToMySQL();
                 send("&6Zalozono Party o nazwie &2" + args[1] + " &6oraz tagu: &7[&2" + args[0] + "&7]");
-                //team.save()''
             }
         });
     }
