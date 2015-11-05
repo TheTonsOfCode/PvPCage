@@ -10,6 +10,7 @@ import org.bukkit.command.CommandSender;
  *
  * @author CTRL
  */
+@Deprecated
 public enum Message {
 
 

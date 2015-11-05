@@ -72,7 +72,7 @@ public class CageCuboid {
 //                || corner(aLX, aLZ, aUX, aUZ, bLX, bUZ)
 //                || corner(aLX, aLZ, aUX, aUZ, bUX, bLZ)
 //                || corner(aLX, aLZ, aUX, aUZ, bUX, bUZ)
-//                || corner(bLX, bLZ, bUX, bUZ, aLX, aLZ)
+//                || corner(bLX, bLZ, bUX, bUZ, aLX, aLZ)             ZLE...
 //                || corner(bLX, bLZ, bUX, bUZ, aLX, aUZ)
 //                || corner(bLX, bLZ, bUX, bUZ, aUX, aLZ)
 //                || corner(bLX, bLZ, bUX, bUZ, aUX, aUZ));
@@ -87,3 +87,4 @@ public class CageCuboid {
 //                || ((bLX >= aLX && bLX <= aUX) || (bUX >= aLX && bUX <= aUX)) && ((bLZ >= aLZ && bLZ <= aUZ) || (bUZ >= aLZ && bUZ <= aUZ)) 
 ////|| ((bLX >= aLX && bUX <= aUX) && (bLZ >= aLZ && bUZ <= aUZ))
 //        );
+//                                                                                      Niby dobre ale z bugsami

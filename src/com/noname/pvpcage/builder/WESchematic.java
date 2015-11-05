@@ -1,7 +1,6 @@
 package com.noname.pvpcage.builder;
 
 import com.noname.pvpcage.PvPCage;
-import com.noname.pvpcage.hooks.WorldEditHook;
 import java.io.File;
 import java.io.IOException;
 
@@ -19,6 +18,7 @@ import com.sk89q.worldedit.MaxChangedBlocksException;
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
+import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.data.DataException;
 import com.sk89q.worldedit.schematic.SchematicFormat;
 import java.util.ArrayList;
@@ -27,6 +27,7 @@ public class WESchematic {
 
     private static final String EXTENSION = "schematic";
     private static final String SCHEM_FOLDER = PvPCage.getInstance().getDataFolder().getAbsolutePath() + "/schems";
+    private static final WorldEditPlugin WE_PLUGIN = PvPCage.getInstance().getWorldEdit();
 
     static {
         File f = new File(SCHEM_FOLDER);
@@ -67,23 +68,23 @@ public class WESchematic {
         return names;
     }
 
-    private final WorldEdit we;
+    private final WorldEdit worldEdit;
     private final LocalSession localSession;
     private final EditSession editSession;
     private final LocalPlayer localPlayer;
 
     public WESchematic(Player player) {
-        we = WorldEditHook.getWorldEdit().getWorldEdit();
-        localPlayer = WorldEditHook.getWorldEdit().wrapPlayer(player);
-        localSession = we.getSession(localPlayer);
+        worldEdit = WE_PLUGIN.getWorldEdit();
+        localPlayer = WE_PLUGIN.wrapPlayer(player);
+        localSession = worldEdit.getSession(localPlayer);
         editSession = localSession.createEditSession(localPlayer);
     }
 
     public WESchematic(World world) {
-        we = WorldEditHook.getWorldEdit().getWorldEdit();
+        worldEdit = WE_PLUGIN.getWorldEdit();
         localPlayer = null;
-        localSession = new LocalSession(we.getConfiguration());
-        editSession = new EditSession(new BukkitWorld(world), we.getConfiguration().maxChangeLimit);
+        localSession = new LocalSession(worldEdit.getConfiguration());
+        editSession = new EditSession(new BukkitWorld(world), worldEdit.getConfiguration().maxChangeLimit);
     }
 
     public void saveSchematic(String schemName, Location l1, Location l2) {
@@ -91,7 +92,7 @@ public class WESchematic {
         Vector min = getMin(l1, l2);
         Vector max = getMax(l1, l2);
         try {
-            saveFile = we.getSafeSaveFile(localPlayer,
+            saveFile = worldEdit.getSafeSaveFile(localPlayer,
                     saveFile.getParentFile(), saveFile.getName(),
                     EXTENSION, new String[]{EXTENSION});
         } catch (FilenameException ex) {
@@ -111,7 +112,7 @@ public class WESchematic {
     public void loadSchematic(String schemName, Location loc) {
         File saveFile = new File(SCHEM_FOLDER, schemName);
         try {
-            saveFile = we.getSafeSaveFile(localPlayer,
+            saveFile = worldEdit.getSafeSaveFile(localPlayer,
                     saveFile.getParentFile(), saveFile.getName(),
                     EXTENSION, new String[]{EXTENSION});
         } catch (FilenameException ex) {
@@ -144,7 +145,7 @@ public class WESchematic {
         } catch (MaxChangedBlocksException ex) {
         }
         editSession.flushQueue();
-        we.flushBlockBag(localPlayer, editSession);
+        worldEdit.flushBlockBag(localPlayer, editSession);
     }
 
     public void loadSchematic(String schemName) {
@@ -154,7 +155,7 @@ public class WESchematic {
     public SchematicCorners getSchematicCorners(String schemName) {
         File saveFile = new File(SCHEM_FOLDER, schemName);
         try {
-            saveFile = we.getSafeSaveFile(localPlayer,
+            saveFile = worldEdit.getSafeSaveFile(localPlayer,
                     saveFile.getParentFile(), saveFile.getName(),
                     EXTENSION, new String[]{EXTENSION});
         } catch (FilenameException ex) {
@@ -204,8 +205,8 @@ public class WESchematic {
 }
 
 /*
- WESchematic s = new TerrainManager(player);
- WESchematic s = new TerrainManager(world);
+ WESchematic s = new WESchematic(player);
+ WESchematic s = new WESchematic(world);
 
  File saveFile = new File(plugin.getDataFolder(), "backup1");
 

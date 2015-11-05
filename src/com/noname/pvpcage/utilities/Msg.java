@@ -26,10 +26,12 @@ public class Msg {
         server.broadcastMessage(Utils.fixColor(message));
     }
     
+    @Deprecated
     public static void console(Object o) {
         console(o.toString());
     }
     
+    @Deprecated
     public static void console(String message) {
         console.sendMessage(Utils.fixColor(message));
     }

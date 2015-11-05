@@ -1,19 +1,21 @@
 package com.noname.pvpcage;
 
 import com.noname.pvpcage.builder.CageBuilder;
-import com.noname.pvpcage.hooks.WorldEditHook;
 import com.noname.pvpcage.managers.FileManager;
 import com.noname.pvpcage.utilities.Configuration;
+import com.noname.pvpcage.utilities.Log;
 import com.noname.pvpcage.utilities.MessageManager;
 import com.noname.pvpcage.utilities.data.MySQL;
 import com.noname.pvpcage.utilities.instance.PIBukkitListeners;
 import com.noname.pvpcage.utilities.instance.PICommand;
+import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import de.slikey.effectlib.EffectManager;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class PvPCage extends JavaPlugin {
@@ -34,8 +36,6 @@ public class PvPCage extends JavaPlugin {
         sql.createTables();
         new PICommand(this).instanceAllAt("com.noname.pvpcage.commands");
         new PIBukkitListeners(this).instanceAllAt("com.noname.pvpcage.listeners");
-
-        new WorldEditHook().onHookConnect(getServer().getPluginManager());
 
         CageBuilder.refreshSchematicsNames();
     }
@@ -76,6 +76,16 @@ public class PvPCage extends JavaPlugin {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    public WorldEditPlugin getWorldEdit() {
+        WorldEditPlugin we = ((WorldEditPlugin) getServer().getPluginManager().getPlugin("WorldEdit"));
+        if (we == null) {
+            Log.DEBUG.print("WorldEdit not hooked.");
+            return null;
+        }
+        Log.DEBUG.print("WorldEdit hooked.");
+        return we;    
     }
 
 }
