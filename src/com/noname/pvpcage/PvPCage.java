@@ -5,7 +5,6 @@ import com.noname.pvpcage.managers.FileManager;
 import com.noname.pvpcage.managers.TeamManager;
 import com.noname.pvpcage.utilities.Configuration;
 import com.noname.pvpcage.utilities.Log;
-import com.noname.pvpcage.utilities.MessageManager;
 import com.noname.pvpcage.utilities.data.MySQL;
 import com.noname.pvpcage.utilities.instance.PIBukkitListeners;
 import com.noname.pvpcage.utilities.instance.PICommand;
@@ -16,19 +15,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class PvPCage extends JavaPlugin {
 
     private static PvPCage instance;
-    private static MessageManager msgManager;
     private static EffectManager effectManager;
     private static MySQL sql;
 
     public void onEnable() {
         instance = this;
-        msgManager = new MessageManager();
         effectManager = new EffectManager(instance);
         FileManager.checkFiles();
         saveDefaultConfig();
@@ -56,10 +52,6 @@ public class PvPCage extends JavaPlugin {
 
     public static PvPCage getInstance() {
         return instance;
-    }
-
-    public static MessageManager getMessageManager() {
-        return msgManager;
     }
 
     public static void copy(InputStream resource, File to) {
