@@ -1,14 +1,12 @@
 package com.noname.pvpcage.utilities.data;
 
-import com.noname.pvpcage.utilities.Configuration;
+import com.noname.pvpcage.configuration.CfgDatabase;
 import com.noname.pvpcage.utilities.Msg;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class MySQL {
 
@@ -37,9 +35,9 @@ public class MySQL {
     public Connection openConnection() throws Exception {
         Class.forName("com.mysql.jdbc.Driver");
         Connection conn = DriverManager.getConnection("jdbc:mysql://"
-                + Configuration.HOST
-                + ":" + Configuration.PORT
-                + "/" + Configuration.DATABASE, Configuration.USER, Configuration.PASSWORD);
+                + CfgDatabase.HOST
+                + ":" + CfgDatabase.PORT
+                + "/" + CfgDatabase.DATABASE, CfgDatabase.USER, CfgDatabase.PASSWORD);
         connection = conn;
         return conn;
     }

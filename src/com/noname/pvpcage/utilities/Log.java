@@ -1,6 +1,7 @@
 package com.noname.pvpcage.utilities;
 
 import com.noname.pvpcage.PvPCage;
+import com.noname.pvpcage.configuration.CONFIG;
 import org.bukkit.command.ConsoleCommandSender;
 
 public enum Log {
@@ -23,7 +24,7 @@ public enum Log {
     private static final ConsoleCommandSender console = PvPCage.getInstance().getServer().getConsoleSender();
 
     private static void print(Log log, String msg) {
-        if(log.level <= Configuration.LOGGER_LEVEL) {
+        if(log.level <= CONFIG.LOGGER_LEVEL) {
             console.sendMessage(Utils.fixColor("&8[&" + log.color + log.name() + "&8] &e>>  &6" + msg));
         }
     }

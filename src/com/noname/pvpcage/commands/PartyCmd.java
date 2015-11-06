@@ -1,12 +1,12 @@
 package com.noname.pvpcage.commands;
 
+import com.noname.pvpcage.configuration.CONFIG;
 import com.noname.pvpcage.managers.TeamManager;
 import com.noname.pvpcage.managers.UserManager;
 import com.noname.pvpcage.objects.Command;
 import com.noname.pvpcage.objects.SubCommand;
 import com.noname.pvpcage.objects.Team;
 import com.noname.pvpcage.objects.User;
-import com.noname.pvpcage.utilities.Configuration;
 import com.noname.pvpcage.utilities.Msg;
 
 public class PartyCmd extends Command {
@@ -27,12 +27,12 @@ public class PartyCmd extends Command {
                     send("&6Posiadasz juz team o tagu: &7[&4" + user.getTeam().getTag() + "&7]");
                     return;
                 }
-                if (args[0].length() > Configuration.PARTY_TAG_LENTH) {
-                    send("&4Maksymalna dlugosc tagu to: &2" + Configuration.PARTY_TAG_LENTH);
+                if (args[0].length() > CONFIG.PARTY_TAG_LENTH) {
+                    send("&4Maksymalna dlugosc tagu to: &2" + CONFIG.PARTY_TAG_LENTH);
                     return;
                 }
-                if (args[1].length() > Configuration.PARTY_NAME_LENTH) {
-                    send("&4Maksymalna dlugosc tagu to: &2" + Configuration.PARTY_NAME_LENTH);
+                if (args[1].length() > CONFIG.PARTY_NAME_LENTH) {
+                    send("&4Maksymalna dlugosc tagu to: &2" + CONFIG.PARTY_NAME_LENTH);
                     return;
                 }
                 if (TeamManager.getTeam(args[0]) != null) {

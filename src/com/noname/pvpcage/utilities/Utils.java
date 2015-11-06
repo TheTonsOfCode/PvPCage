@@ -4,8 +4,12 @@ import com.noname.pvpcage.PvPCage;
 import de.slikey.effectlib.effect.TextEffect;
 import de.slikey.effectlib.util.ParticleEffect;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -19,7 +23,7 @@ public class Utils {
     public static final Random RANDOM = new Random();
 
     public static void createParticleText(String chars, Location loc) {
-        TextEffect text = new TextEffect(PvPCage.getEffectManager());
+        TextEffect text = new TextEffect(PvPCage.getInstance().getEffectManager());
         text.text = chars;
         text.particle.equals(ParticleEffect.FLAME);
         text.period = 10;
@@ -85,5 +89,23 @@ public class Utils {
             err.printStackTrace();
         }
         return null;
+    }
+    
+    public static void copy(InputStream resource, File to) {
+        try {
+            OutputStream out = new FileOutputStream(to);
+
+            int size = 0;
+            byte[] buffer = new byte[1024];
+
+            while ((size = resource.read(buffer)) != -1) {
+                out.write(buffer, 0, size);
+            }
+
+            resource.close();
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1,9 +1,8 @@
 package com.noname.pvpcage.objects;
 
 import com.noname.pvpcage.PvPCage;
-import com.noname.pvpcage.managers.TeamManager;
+import com.noname.pvpcage.configuration.CONFIG;
 import com.noname.pvpcage.managers.UserManager;
-import com.noname.pvpcage.utilities.Configuration;
 import com.noname.pvpcage.utilities.Msg;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,10 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-/**
- *
- * @author dekros987
- */
 public class Team {
 
     private int max_size;
@@ -30,7 +25,7 @@ public class Team {
     private Long createTime;
 
     public Team() {
-        max_size = Configuration.PARTY_MAX_MEMBERS;
+        max_size = CONFIG.PARTY_MAX_MEMBERS;
         tag = "";
         name = "";
         leader = null;
@@ -133,10 +128,10 @@ public class Team {
      private Long createTime;
      */
     private void loadMembers() {
-        Connection conn = PvPCage.getMySQL().getConnection();
+        Connection conn = PvPCage.getInstance().getMySQL().getConnection();
         if (conn == null) {
             try {
-                conn = PvPCage.getMySQL().openConnection();
+                conn = PvPCage.getInstance().getMySQL().openConnection();
             } catch (Exception e) {
                 Msg.console("&4Nie mozna wczytaj ofiar z powodu braku polaczenia do mysql!");
                 return;
@@ -157,15 +152,15 @@ public class Team {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        PvPCage.getMySQL().closeResources(rs, st);
+        PvPCage.getInstance().getMySQL().closeResources(rs, st);
 
     }
 
     private void saveMembers() {
-        Connection conn = PvPCage.getMySQL().getConnection();
+        Connection conn = PvPCage.getInstance().getMySQL().getConnection();
         if (conn == null) {
             try {
-                conn = PvPCage.getMySQL().openConnection();
+                conn = PvPCage.getInstance().getMySQL().openConnection();
             } catch (Exception e) {
                 Msg.console("&4Nie mozna zapisac ofiar z powodu braku polaczenia do mysql!");
                 return;
@@ -187,14 +182,14 @@ public class Team {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        PvPCage.getMySQL().closeResources(null, st);
+        PvPCage.getInstance().getMySQL().closeResources(null, st);
     }
 
     public void saveToMySQL() {
-        Connection conn = PvPCage.getMySQL().getConnection();
+        Connection conn = PvPCage.getInstance().getMySQL().getConnection();
         if (conn == null) {
             try {
-                conn = PvPCage.getMySQL().openConnection();
+                conn = PvPCage.getInstance().getMySQL().openConnection();
             } catch (Exception e) {
                 Msg.console("&4Nie mozna zapisac teamu z powodu braku polaczenia do mysql!");
                 return;
@@ -220,14 +215,14 @@ public class Team {
             e.printStackTrace();
         }
         saveMembers();
-        PvPCage.getMySQL().closeResources(null, st);
+        PvPCage.getInstance().getMySQL().closeResources(null, st);
     }
 
     public void loadFromMySQL() {
-        Connection conn = PvPCage.getMySQL().getConnection();
+        Connection conn = PvPCage.getInstance().getMySQL().getConnection();
         if (conn == null) {
             try {
-                conn = PvPCage.getMySQL().openConnection();
+                conn = PvPCage.getInstance().getMySQL().openConnection();
             } catch (Exception e) {
                 Msg.console("&4Nie mozna wczytaj teamu z powodu braku polaczenia do mysql!");
                 return;
@@ -250,7 +245,7 @@ public class Team {
             e.printStackTrace();
         }
         loadMembers();
-        PvPCage.getMySQL().closeResources(rs, st);
+        PvPCage.getInstance().getMySQL().closeResources(rs, st);
     }
 }
 

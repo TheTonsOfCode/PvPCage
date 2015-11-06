@@ -4,6 +4,6 @@ MySQL:
     Database: minecraft
     User: root
     Port: 3306
-Cage:
-    Wall_Material: STAINED_GLASS
-    Floor_Material: NETHER_BRICK
+Party_Max_Members: 5
+Party_Name_Lenth: 16
+Party_Tag_Lenth: 6

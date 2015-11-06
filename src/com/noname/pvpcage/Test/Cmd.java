@@ -16,7 +16,7 @@ public class Cmd implements CommandExecutor {
         if (sender instanceof Player) {
             ItemManager.createInventory((Player) sender);
             Player p = (Player) sender;
-            TextEffect text = new TextEffect(PvPCage.getEffectManager());
+            TextEffect text = new TextEffect(PvPCage.getInstance().getEffectManager());
             text.setLocation(new Location(p.getWorld(), p.getLocation().getX(), p.getLocation().getY() + 3, p.getLocation().getZ()));
             text.text = "Wlasciciel";
             text.particle = ParticleEffect.CRIT;

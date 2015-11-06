@@ -24,10 +24,10 @@ public enum Table {
         try {
             String query = loadCreateQuery();
             System.out.println(query);
-            Connection conn = PvPCage.getMySQL().getConnection();
+            Connection conn = PvPCage.getInstance().getMySQL().getConnection();
             if (conn == null) {
                 try {
-                    conn = PvPCage.getMySQL().openConnection();
+                    conn = PvPCage.getInstance().getMySQL().openConnection();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

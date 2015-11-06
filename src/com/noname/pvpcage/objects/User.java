@@ -142,10 +142,10 @@ public class User {
     }
 
     private void loadVictims() {
-        Connection conn = PvPCage.getMySQL().getConnection();
+        Connection conn = PvPCage.getInstance().getMySQL().getConnection();
         if (conn == null) {
             try {
-                conn = PvPCage.getMySQL().openConnection();
+                conn = PvPCage.getInstance().getMySQL().openConnection();
             } catch (Exception e) {
                 Msg.console("&4Nie mozna wczytaj ofiar z powodu braku polaczenia do mysql!");
                 return;
@@ -166,15 +166,15 @@ public class User {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        PvPCage.getMySQL().closeResources(rs, st);
+        PvPCage.getInstance().getMySQL().closeResources(rs, st);
 
     }
 
     private void saveVictims() {
-        Connection conn = PvPCage.getMySQL().getConnection();
+        Connection conn = PvPCage.getInstance().getMySQL().getConnection();
         if (conn == null) {
             try {
-                conn = PvPCage.getMySQL().openConnection();
+                conn = PvPCage.getInstance().getMySQL().openConnection();
             } catch (Exception e) {
                 Msg.console("&4Nie mozna zapisac ofiar z powodu braku polaczenia do mysql!");
                 return;
@@ -196,14 +196,14 @@ public class User {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        PvPCage.getMySQL().closeResources(null, st);
+        PvPCage.getInstance().getMySQL().closeResources(null, st);
     }
 
     public void loadFromMySQL() {
-        Connection conn = PvPCage.getMySQL().getConnection();
+        Connection conn = PvPCage.getInstance().getMySQL().getConnection();
         if (conn == null) {
             try {
-                conn = PvPCage.getMySQL().openConnection();
+                conn = PvPCage.getInstance().getMySQL().openConnection();
             } catch (Exception e) {
                 Msg.console("&4Nie mozna wczytaj gracza z powodu braku polaczenia do mysql!");
                 return;
@@ -227,14 +227,14 @@ public class User {
             e.printStackTrace();
         }
         loadVictims();
-        PvPCage.getMySQL().closeResources(rs, st);
+        PvPCage.getInstance().getMySQL().closeResources(rs, st);
     }
 
     public void saveToMySQL() {
-        Connection conn = PvPCage.getMySQL().getConnection();
+        Connection conn = PvPCage.getInstance().getMySQL().getConnection();
         if (conn == null) {
             try {
-                conn = PvPCage.getMySQL().openConnection();
+                conn = PvPCage.getInstance().getMySQL().openConnection();
             } catch (Exception e) {
                 Msg.console("&4Nie mozna zapisac gracza z powodu braku polaczenia do mysql!");
                 return;
@@ -261,6 +261,6 @@ public class User {
             e.printStackTrace();
         }
         saveVictims();
-        PvPCage.getMySQL().closeResources(null, st);
+        PvPCage.getInstance().getMySQL().closeResources(null, st);
     }
 }
