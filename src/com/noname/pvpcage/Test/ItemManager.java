@@ -2,8 +2,6 @@ package com.noname.pvpcage.Test;
 
 import com.noname.pvpcage.managers.UserManager;
 import com.noname.pvpcage.objects.User;
-import com.noname.pvpcage.reflect.ReflConstants;
-import com.noname.pvpcage.reflect.ReflectUTIL;
 import com.noname.pvpcage.utilities.Utils;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +11,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import pl.piterka.piterkaApis.ReflConstants;
+import pl.piterka.piterkaApis.ReflectUTIL;
 
 public class ItemManager {
 

@@ -6,21 +6,13 @@ import com.noname.pvpcage.builder.WESchematic;
 import com.noname.pvpcage.listeners.CageItemListener;
 import com.noname.pvpcage.objects.Command;
 import com.noname.pvpcage.objects.SubCommand;
-import java.io.File;
 
 public class CageCmd extends Command {
 
     public CageCmd() {
         super("cage", "komenda glowna", "");
         setMins(1, 2, "<subcommand>");
-        addSubCommand(new SubCommand("build", "buduje klatke", "b") {
-                @Override
-                protected void execute() {
-//                    new WalledCage().onCreateBattle(player.getLocation());
-                    CageBuilder.bb(player.getLocation());
-                    send("&aStworzono klatke!");
-                }  
-        });
+        
         addSubCommand(new SubCommand("world", "tworzy cage world'a", "w") {
                 @Override
                 protected void execute() {
@@ -44,18 +36,17 @@ public class CageCmd extends Command {
                     send("&aNie odnaleziono Cage World'u!");
                 }  
         });
-        addSubCommand(new SubCommand("cc", "buduje 32 klatki", "") {
+        addSubCommand(new SubCommand("cc", "buduje 12 klatek", "") {
                 @Override
                 protected void execute() {
                     for (int j = 0; j < 32 ;j++) {
                         CageBuilder.buildRandomSchematicCage();
-//                        CageBuilder.buildCage(new WalledCage());
                     }
-                    send("&aStworzono 32 klatki!");
+                    send("&aStworzono 12 klatek!");
                 }  
         });
         
-        addSubCommand(new SubCommand("schem", "zapisuje teren", "sch") {
+        addSubCommand(new SubCommand("schem", "tworzy schematic klatki", "sch") {
                 @Override
                 protected void execute() {
                     if(len != 2) {
@@ -75,24 +66,16 @@ public class CageCmd extends Command {
                     
                     new WESchematic(player).saveSchematic(args[1], CageItemListener.LEFT, CageItemListener.RIGHT);
                     CageBuilder.refreshSchematicsNames();
+                    send("&aUtworzono schemat klatki o nazwie &f" + args[1] + "&a! &ePamietaj o skonfigurowaniu go!");
                 }  
         });
         
-        addSubCommand(new SubCommand("z", "zapisuje", "") {
+        addSubCommand(new SubCommand("borderTest", "buduje testowy scheatic klatki", "bt") {
                 @Override
                 protected void execute() {
-                    if(len != 2) {
-                        correct();
-                        return;
-                    }
-                    
-                    if(!CageBuilder.schemExist(args[1])) {
-                        send("&eNie rozpoznano schematu!");
-                        return;
-                    }
-                    
-                    new WESchematic(player).loadSchematic(args[1], player.getLocation());
-                }
+                    CageBuilder.bb(player.getLocation());
+                    send("&aStworzono klatke!");
+                }  
         });
     }
 
