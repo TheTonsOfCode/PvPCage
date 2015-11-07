@@ -28,8 +28,10 @@ public class Team {
         max_size = CONFIG.PARTY_MAX_MEMBERS;
         tag = "";
         name = "";
+        members = new ArrayList<>();
         leader = null;
         mod = null;
+
     }
 
     public int getMax_size() {
@@ -206,8 +208,8 @@ public class Team {
             st = conn.prepareStatement(query.toString());
             st.setString(1, tag);
             st.setString(2, name);
-            st.setString(3, leader.getUuid().toString());
-            st.setString(4, mod.getUuid().toString());
+            st.setString(3, leader == null ? "" : leader.getUuid().toString());
+            st.setString(4, mod == null ? "" : mod.getUuid().toString());
             st.setLong(5, lifeTime);
             st.setLong(6, createTime);
             st.executeUpdate();
