@@ -11,6 +11,7 @@ public enum Log {
     DEBUG(3, 3);
     
     protected int level, color;
+    protected String prefix;
     
     private Log(int level, int color) {
         this.level = level;
@@ -18,14 +19,19 @@ public enum Log {
     }
     
     public void print(String msg) {
-        print(this, msg);
+        print(this, prefix, msg);
+    }
+    
+    public Log prefix(String prefix) {
+        this.prefix = prefix;
+        return this;
     }
 
     private static final ConsoleCommandSender console = PvPCage.getInstance().getServer().getConsoleSender();
 
-    private static void print(Log log, String msg) {
+    private static void print(Log log, String prefix, String msg) {
         if(log.level <= CONFIG.LOGGER_LEVEL) {
-            console.sendMessage(Utils.fixColor("&8[&" + log.color + log.name() + "&8] &e>>  &6" + msg));
+            console.sendMessage(Utils.fixColor("&8[&" + log.color + log.name() + "&8]" + (prefix != null ? "<&7" + prefix + "&8>" : "") + " &e>>  &6" + msg));
         }
     }
 }

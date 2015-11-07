@@ -13,7 +13,6 @@ public class PlayerJoinListener implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
-        System.out.println("dziala!");
         User user = new User(e.getPlayer().getUniqueId());
         user.loadFromMySQL();
         user.setPlayer(e.getPlayer());

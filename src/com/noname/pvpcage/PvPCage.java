@@ -52,10 +52,10 @@ public class PvPCage extends JavaPlugin {
     public WorldEditPlugin getWorldEdit() {
         WorldEditPlugin we = ((WorldEditPlugin) getServer().getPluginManager().getPlugin("WorldEdit"));
         if (we == null) {
-            Log.DEBUG.print("WorldEdit not hooked.");
+            Log.INFO.print("WorldEdit not hooked.");
             return null;
         }
-        Log.DEBUG.print("WorldEdit hooked.");
+        Log.INFO.print("WorldEdit hooked.");
         return we;    
     }
 

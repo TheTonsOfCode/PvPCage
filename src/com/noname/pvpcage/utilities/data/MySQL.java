@@ -1,7 +1,7 @@
 package com.noname.pvpcage.utilities.data;
 
 import com.noname.pvpcage.configuration.CfgDatabase;
-import com.noname.pvpcage.utilities.Msg;
+import com.noname.pvpcage.utilities.Log;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -9,22 +9,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MySQL {
-
-    private Connection connection;
+    
+    public static final Log LOG_ERROR = Log.ERROR.prefix("MySQL");
+    public static final Log LOG_INFO = Log.INFO.prefix("MySQL");
+    public Connection connection;
 
     public MySQL() {
         try {
             openConnection();
             
-            Msg.console("polaczono z baza danych");
+            LOG_INFO.print("&aPolaczono z baza danych MajSeQuEl.");
         } catch (Exception e) {
-            Msg.console("&4NIE POLACZONO Z MYSQL");
+            LOG_ERROR.print("&4NIE POLACZONO Z MYSQL");
         }
     }
 
     public void createTables() {
         if (getConnection() == null) {
-            Msg.console("&4NIE MOZNA STWORZYC TABEL PONIEWAZ NIE POLACZONO Z MYSQL");
+            LOG_ERROR.print("&4NIE MOZNA STWORZYC TABEL PONIEWAZ NIE POLACZONO Z MYSQL");
             return;
         }
         for (Table t : Table.values()) {
@@ -49,7 +51,7 @@ public class MySQL {
             try {
                 return openConnection();
             } catch (Exception e) {
-                Msg.console("&4Blad z otwarciem polaczenia");
+//                LOG_ERROR.print("&4Blad z otwarciem polaczenia");
                 return null;
             }//hehe
         }

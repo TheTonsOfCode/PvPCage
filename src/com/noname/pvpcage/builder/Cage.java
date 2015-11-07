@@ -27,6 +27,10 @@ public class Cage {
         return cageCuboid;
     }
     
+    public CageConfigFile getCageConfigFile() {
+        return CageConfigFile.getCageConfigFile(schemName);
+    }
+    
     public void calculateCuboid(Location loc) {
         cageCuboid = new CageCuboid(l1, l2, loc);
     }

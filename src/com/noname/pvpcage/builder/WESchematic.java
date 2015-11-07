@@ -1,6 +1,7 @@
 package com.noname.pvpcage.builder;
 
 import com.noname.pvpcage.PvPCage;
+import com.noname.pvpcage.utilities.Log;
 import java.io.File;
 import java.io.IOException;
 
@@ -103,6 +104,8 @@ public class WESchematic {
         clipboard.copy(editSession);
         try {
             SchematicFormat.MCEDIT.save(clipboard, saveFile);
+            new CageConfigFile(schemName);
+            Log.DEBUG.print("&6Schematic &f" + schemName + " &6saved successful!");
         } catch (IOException ex) {
         } catch (DataException ex) {
         }

@@ -3,7 +3,9 @@ package com.noname.pvpcage.objects;
 import com.noname.pvpcage.PvPCage;
 import com.noname.pvpcage.configuration.CONFIG;
 import com.noname.pvpcage.managers.UserManager;
+import com.noname.pvpcage.utilities.Log;
 import com.noname.pvpcage.utilities.Msg;
+import com.noname.pvpcage.utilities.Utils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -133,7 +135,7 @@ public class Team {
             try {
                 conn = PvPCage.getInstance().getMySQL().openConnection();
             } catch (Exception e) {
-                Msg.console("&4Nie mozna wczytaj ofiar z powodu braku polaczenia do mysql!");
+                 Log.ERROR.prefix("MySQL").print("&4Nie mozna wczytaj ofiar z powodu braku polaczenia do mysql!");
                 return;
             }
         }
@@ -162,7 +164,7 @@ public class Team {
             try {
                 conn = PvPCage.getInstance().getMySQL().openConnection();
             } catch (Exception e) {
-                Msg.console("&4Nie mozna zapisac ofiar z powodu braku polaczenia do mysql!");
+                Log.ERROR.prefix("MySQL").print("&4Nie mozna zapisac ofiar z powodu braku polaczenia do mysql!");
                 return;
             }
         }
@@ -191,19 +193,13 @@ public class Team {
             try {
                 conn = PvPCage.getInstance().getMySQL().openConnection();
             } catch (Exception e) {
-                Msg.console("&4Nie mozna zapisac teamu z powodu braku polaczenia do mysql!");
+                Log.ERROR.prefix("MySQL").print("&4Nie mozna zapisac teamu z powodu braku polaczenia do mysql!");
                 return;
             }
         }
-        PreparedStatement st = null;
-        StringBuilder query = new StringBuilder();
-        query.append("INSERT INTO `TeamDataPvPCage` (`tag`, `name`, `leader`, `mod`, `lifetime`,`createtime`)")
-                .append("VALUES (?,?,?,?,?,?) ON DUPLICATE KEY UPDATE ")
-                .append(" `tag`=VALUES(`tag`), `name`=VALUES(`name`), `leader`=VALUES(`leader`), ")
-                .append("`mod`=VALUES(`mod`), `lifetime`=VALUES(`lifetime`),")
-                .append("`createtime`=VALUES(`createtime`)");
+        PreparedStatement st = null;      
         try {
-            st = conn.prepareStatement(query.toString());
+            st = conn.prepareStatement(Utils.loadQueryNew("insertTeamData"));
             st.setString(1, tag);
             st.setString(2, name);
             st.setString(3, leader.getUuid().toString());
@@ -224,7 +220,7 @@ public class Team {
             try {
                 conn = PvPCage.getInstance().getMySQL().openConnection();
             } catch (Exception e) {
-                Msg.console("&4Nie mozna wczytaj teamu z powodu braku polaczenia do mysql!");
+                Log.ERROR.prefix("MySQL").print("&4Nie mozna wczytaj teamu z powodu braku polaczenia do mysql!");
                 return;
             }
         }
