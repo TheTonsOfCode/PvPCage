@@ -59,11 +59,16 @@ public class TeamManager {
 
     public static void loadTeamsFromMySQL() {
         int load = 0;
+
         Log.INFO.print("&2Zaladowano: &6&l" + load + "&r&2 Teamow");
     }
 
     public static void saveTeamtoMySQL() {
         int saved = 0;
+        for (Team team : TeamManager.getTeams()) {
+            team.saveToMySQL();
+            saved++;
+        }
         Log.INFO.print("&2Zapisano: &6&l" + saved + "&r&2 Teamow");
     }
 

@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.UUID;
 import org.bukkit.entity.Player;
 
-
 public class User {
 
     private String name;
@@ -32,6 +31,7 @@ public class User {
     private List<Item> selectedItem = new ArrayList<>();
 
     public User(UUID uuid) {
+        this.uuid = uuid;
         winDuel = 0;
         name = "";
         loseDuel = 0;
@@ -182,15 +182,20 @@ public class User {
                 return;
             }
         }
-
+        /*
+         Statement st = null;
+         Set<Integer> toRem = getRecordsToRemove(player);
+         try {
+         st = connection.createStatement();
+         */
         PreparedStatement st = null;
         try {
             for (User victim : victims) {
                 st.addBatch(Utils.loadQueryNew("insertVictimsData"));
                 st.setString(1, uuid.toString());
                 st.setString(2, victim.getUuid().toString());
+                st.executeQuery();
             }
-            st.executeBatch();
         } catch (SQLException e) {
             e.printStackTrace();
         }
