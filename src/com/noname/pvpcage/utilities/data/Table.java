@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public enum Table {
 
-    DEATHS("Deaths"),
+    DEATHS("Victims"),
     TEAMS("Teams"),
     USERS("Users"),
     TEAM_MEMBERS("Members");
